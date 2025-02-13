@@ -274,7 +274,7 @@ function App() {
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div className="bg-gray-800 p-4 rounded-lg transform hover:scale-105 transition-transform">
-                <p className="text-xs sm:text-sm mb-1">Current Semester GPA</p>
+                <p className="text-xs sm:text-sm mb-1">Current Trimester GPA</p>
                 <p className="text-xl sm:text-2xl font-bold text-orange-500">{calculateGPA().toFixed(2)}</p>
               </div>
               <div className="bg-gray-800 p-4 rounded-lg transform hover:scale-105 transition-transform">
