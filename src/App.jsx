@@ -139,7 +139,7 @@ function App() {
 
         <div className="bg-gray-900 p-3 sm:p-6 rounded-lg mb-4 sm:mb-6">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 mb-4">
-            <h2 className="text-lg sm:text-xl font-semibold">Current Semester Courses</h2>
+            <h2 className="text-lg sm:text-xl font-semibold">Current Trimester Courses</h2>
             <div className="flex gap-2 w-full sm:w-auto">
               <button
                 onClick={addCourse}
