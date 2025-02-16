@@ -172,7 +172,7 @@ function App() {
     return Math.min(4.0, cgpa);
   };
 
-  const calculateCurrentSemesterCredits = () => {
+  const calculateCurrentTrimesterCredits = () => {
     let totalCredits = 0;
     
     courses.forEach(course => {
@@ -247,7 +247,7 @@ function App() {
 
         <div className="bg-white dark:bg-gray-900 p-3 sm:p-6 rounded-lg mb-4 sm:mb-6 shadow-md transition-colors duration-300">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 mb-4">
-            <h2 className="text-lg sm:text-xl font-semibold">Current Semester Courses</h2>
+            <h2 className="text-lg sm:text-xl font-semibold">Current Trimester Courses</h2>
             <div className="flex gap-2 w-full sm:w-auto">
               <button
                 onClick={addCourse}
@@ -409,7 +409,7 @@ function App() {
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="bg-gray-100 dark:bg-gray-800/80 backdrop-blur-sm p-4 rounded-lg transform hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/20">
-                  <p className="text-sm mb-1">Current Semester GPA</p>
+                  <p className="text-sm mb-1">Current Trimester GPA</p>
                   <p className="text-2xl sm:text-3xl font-bold text-orange-500">{calculateGPA().toFixed(2)}</p>
                 </div>
                 <div className="bg-gray-100 dark:bg-gray-800/80 backdrop-blur-sm p-4 rounded-lg transform hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/20">
@@ -417,8 +417,8 @@ function App() {
                   <p className="text-2xl sm:text-3xl font-bold text-orange-500">{calculateCGPA().toFixed(2)}</p>
                 </div>
                 <div className="bg-gray-100 dark:bg-gray-800/80 backdrop-blur-sm p-4 rounded-lg transform hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/20">
-                  <p className="text-sm mb-1">Current Semester Credits</p>
-                  <p className="text-2xl sm:text-3xl font-bold text-orange-500">{calculateCurrentSemesterCredits()}</p>
+                  <p className="text-sm mb-1">Current Trimester Credits</p>
+                  <p className="text-2xl sm:text-3xl font-bold text-orange-500">{calculateCurrentTrimesterCredits()}</p>
                 </div>
                 <div className="bg-gray-100 dark:bg-gray-800/80 backdrop-blur-sm p-4 rounded-lg transform hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/20">
                   <p className="text-sm mb-1">Total Credits Completed</p>
