@@ -206,7 +206,7 @@ function App() {
         </h1>
         <p className="text-center mb-1 text-sm sm:text-base flex items-center justify-center gap-2">
           <Code2 size={20} className="text-orange-500" />
-          Made by <span className="text-orange-500 font-semibold hover:text-orange-400 transition-colors cursor-default">Ishmam</span>
+          Developed by <span className="text-orange-500 font-semibold hover:text-orange-400 transition-colors cursor-default">Ishmam</span>
         </p>
         <div className="flex items-center justify-center gap-2 mb-6 sm:mb-8">
           <span className="text-sm sm:text-base">Contact:</span>
