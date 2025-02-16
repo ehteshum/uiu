@@ -300,9 +300,10 @@ function App() {
               </div>
               <button
                 onClick={() => removeCourse(index)}
-                className="self-end bg-red-500 text-white px-2 py-0.5 rounded hover:bg-red-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95 inline-flex items-center gap-1 text-[10px]"
+                className="self-end bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition-all duration-300 transform hover:scale-110 hover:shadow-lg active:scale-95 flex items-center justify-center"
+                aria-label="Remove course"
               >
-                <Trash2 size={12} /> Remove
+                <Trash2 size={20} />
               </button>
             </div>
           ))}
@@ -356,9 +357,10 @@ function App() {
               </div>
               <button
                 onClick={() => removeRetake(index)}
-                className="self-end bg-red-500 text-white px-2 py-0.5 rounded hover:bg-red-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95 inline-flex items-center gap-1 text-[10px]"
+                className="self-end bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition-all duration-300 transform hover:scale-110 hover:shadow-lg active:scale-95 flex items-center justify-center"
+                aria-label="Remove retake"
               >
-                <Trash2 size={12} /> Remove
+                <Trash2 size={20} />
               </button>
             </div>
           ))}
