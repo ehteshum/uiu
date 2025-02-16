@@ -225,6 +225,7 @@ function App() {
             <label className="block mb-2 text-sm sm:text-base">Completed Credits</label>
             <input
               type="number"
+              min="0"
               value={completedCredit || ''}
               onChange={(e) => setCompletedCredit(e.target.value ? Number(e.target.value) : undefined)}
               placeholder="Enter completed credits"
@@ -235,6 +236,7 @@ function App() {
             <label className="block mb-2 text-sm sm:text-base">Current CGPA</label>
             <input
               type="number"
+              min="0"
               step="0.01"
               max="4.00"
               value={currentCGPA || ''}
@@ -300,10 +302,10 @@ function App() {
               </div>
               <button
                 onClick={() => removeCourse(index)}
-                className="self-end bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition-all duration-300 transform hover:scale-110 hover:shadow-lg active:scale-95 flex items-center justify-center"
+                className="self-end bg-red-500 text-white p-2.5 rounded-md hover:bg-red-600 transition-all duration-300 transform hover:scale-110 hover:shadow-lg active:scale-95 flex items-center justify-center"
                 aria-label="Remove course"
               >
-                <Trash2 size={20} />
+                <Trash2 size={19} />
               </button>
             </div>
           ))}
@@ -357,10 +359,10 @@ function App() {
               </div>
               <button
                 onClick={() => removeRetake(index)}
-                className="self-end bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition-all duration-300 transform hover:scale-110 hover:shadow-lg active:scale-95 flex items-center justify-center"
+                className="self-end bg-red-500 text-white p-2.5 rounded-md hover:bg-red-600 transition-all duration-300 transform hover:scale-110 hover:shadow-lg active:scale-95 flex items-center justify-center"
                 aria-label="Remove retake"
               >
-                <Trash2 size={20} />
+                <Trash2 size={19} />
               </button>
             </div>
           ))}
