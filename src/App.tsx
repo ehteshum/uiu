@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Facebook, PlusCircle, Trash2, Calculator, GraduationCap, Code2, RefreshCw, X, Sun, Moon } from 'lucide-react';
+import Confetti from 'react-confetti';
 
 interface Course {
   credit: string;
@@ -41,6 +42,7 @@ function App() {
   const [showResults, setShowResults] = useState(false);
   const [isModalClosing, setIsModalClosing] = useState(false);
   const [theme, setTheme] = useState('dark');
+  const [showConfetti, setShowConfetti] = useState(false);
 
   // Force dark theme on mount
   useEffect(() => {
@@ -85,6 +87,7 @@ function App() {
     setTimeout(() => {
       setShowResults(false);
       setIsModalClosing(false);
+      setShowConfetti(false);
     }, 300);
   };
 
@@ -187,6 +190,14 @@ function App() {
   const calculateTotalCredits = () => {
     return (completedCredit || 0) + courses.reduce((sum, course) => 
       sum + (course.credit ? Number(course.credit) : 0), 0);
+  };
+
+  const handleCalculateClick = () => {
+    const newCGPA = calculateCGPA();
+    if (currentCGPA !== undefined && newCGPA > currentCGPA) {
+      setShowConfetti(true);
+    }
+    setShowResults(true);
   };
 
   return (
@@ -369,7 +380,7 @@ function App() {
         </div>
 
         <button
-          onClick={() => setShowResults(true)}
+          onClick={handleCalculateClick}
           className="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95 font-bold text-base sm:text-lg flex items-center justify-center gap-2"
         >
           <Calculator size={24} />
@@ -382,6 +393,13 @@ function App() {
               isModalClosing ? 'opacity-0' : 'opacity-100'
             }`}
           >
+            {showConfetti && <Confetti 
+              width={window.innerWidth}
+              height={window.innerHeight}
+              recycle={false}
+              numberOfPieces={200}
+              gravity={0.3}
+            />}
             <div 
               className={`absolute inset-0 backdrop-blur-sm bg-black/70 transition-all duration-300 ${
                 isModalClosing ? 'opacity-0' : 'opacity-100'
