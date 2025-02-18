@@ -150,10 +150,11 @@ function App() {
   };
 
   const calculateCGPA = () => {
-    if (completedCredit === undefined || currentCGPA === undefined) return 0;
+    const defaultCompletedCredit = completedCredit ?? 0;
+    const defaultCurrentCGPA = currentCGPA ?? 0;
     
-    let adjustedPoints = currentCGPA * completedCredit;
-    let totalCredits = completedCredit;
+    let adjustedPoints = defaultCurrentCGPA * defaultCompletedCredit;
+    let totalCredits = defaultCompletedCredit;
     
     courses.forEach(course => {
       if (course.credit && course.grade && gradePoints[course.grade] !== undefined) {
@@ -188,7 +189,8 @@ function App() {
   };
 
   const calculateTotalCredits = () => {
-    return (completedCredit || 0) + courses.reduce((sum, course) => 
+    const defaultCompletedCredit = completedCredit ?? 0;
+    return defaultCompletedCredit + courses.reduce((sum, course) => 
       sum + (course.credit ? Number(course.credit) : 0), 0);
   };
 
