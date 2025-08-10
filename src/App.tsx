@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Facebook, PlusCircle, Trash2, Calculator, GraduationCap, Code2, RefreshCw, X, Sun, Moon, Banknote } from 'lucide-react';
-import Confetti from 'react-confetti';
+// Confetti removed to improve performance
 
 interface Course {
   credit: string;
@@ -42,7 +42,7 @@ function App() {
   const [showResults, setShowResults] = useState(false);
   const [isModalClosing, setIsModalClosing] = useState(false);
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
-  const [showConfetti, setShowConfetti] = useState(false);
+  // Confetti state removed
   const [tuitionTotal, setTuitionTotal] = useState<number | undefined>();
   const [activeTab, setActiveTab] = useState<'cgpa' | 'tuition'>('cgpa');
   const [waiverPct, setWaiverPct] = useState<number | undefined>();
@@ -90,7 +90,6 @@ function App() {
     setTimeout(() => {
       setShowResults(false);
       setIsModalClosing(false);
-      setShowConfetti(false);
     }, 300);
   };
 
@@ -187,15 +186,17 @@ function App() {
 
   const handleCalculateClick = () => {
     const newCGPA = calculateCGPA();
-    if (currentCGPA !== undefined && newCGPA > (currentCGPA as number)) {
-      setShowConfetti(true);
-    }
     setShowResults(true);
   };
 
   // Tuition helpers
   const formatAmount = (n: number) => n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const formatPercent = (p?: number) => (p ? `${p}%` : 'None');
+  const weekdayOf = (dateText: string) => {
+    const d = new Date(dateText);
+    if (isNaN(d.getTime())) return '';
+    return d.toLocaleDateString(undefined, { weekday: 'long' });
+  };
 
   const discountedTuition = (() => {
     const main = tuitionTotal ?? 0;
@@ -456,6 +457,7 @@ function App() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div className="col-span-1 sm:col-span-2">
                 <label className="block mb-2 text-sm sm:text-base">Total Fee for this Trimester</label>
+                <p className="-mt-1 mb-2 text-xs text-gray-500">(Showing on UCAM)</p>
                 <input
                   type="number"
                   min="0"
@@ -547,17 +549,17 @@ function App() {
                   <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg">
                     <p className="text-sm text-gray-600 dark:text-gray-300">First Payment (40%)</p>
                     <p className="text-2xl font-bold text-green-600">{formatAmount(tuitionBreakdown.first)}</p>
-                    <p className="text-xs text-gray-500 mt-1">Due: {installmentDates.first}</p>
+                    <p className="text-xs text-gray-500 mt-1">Last Date: {installmentDates.first}{weekdayOf(installmentDates.first) ? ` (${weekdayOf(installmentDates.first)})` : ''}</p>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg">
                     <p className="text-sm text-gray-600 dark:text-gray-300">Second Payment (30%)</p>
                     <p className="text-2xl font-bold text-green-600">{formatAmount(tuitionBreakdown.second)}</p>
-                    <p className="text-xs text-gray-500 mt-1">Due: {installmentDates.second}</p>
+                    <p className="text-xs text-gray-500 mt-1">Last Date: {installmentDates.second}{weekdayOf(installmentDates.second) ? ` (${weekdayOf(installmentDates.second)})` : ''}</p>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg">
                     <p className="text-sm text-gray-600 dark:text-gray-300">Third Payment (30%)</p>
                     <p className="text-2xl font-bold text-green-600">{formatAmount(tuitionBreakdown.third)}</p>
-                    <p className="text-xs text-gray-500 mt-1">Due: {installmentDates.third}</p>
+                    <p className="text-xs text-gray-500 mt-1">Last Date: {installmentDates.third}{weekdayOf(installmentDates.third) ? ` (${weekdayOf(installmentDates.third)})` : ''}</p>
                   </div>
                   <div className="bg-gray-100 dark:bg-gray-800/80 p-3 rounded-lg">
                     <p className="text-sm text-gray-600 dark:text-gray-300">Total</p>
@@ -576,13 +578,7 @@ function App() {
               isModalClosing ? 'opacity-0' : 'opacity-100'
             }`}
           >
-            {showConfetti && <Confetti 
-              width={window.innerWidth}
-              height={window.innerHeight}
-              recycle={false}
-              numberOfPieces={200}
-              gravity={0.3}
-            />}
+            {/* Confetti removed */}
             <div 
               className={`absolute inset-0 backdrop-blur-sm bg-black/70 transition-all duration-300 ${
                 isModalClosing ? 'opacity-0' : 'opacity-100'
