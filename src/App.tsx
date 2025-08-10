@@ -47,6 +47,7 @@ function App() {
   const [activeTab, setActiveTab] = useState<'cgpa' | 'tuition'>('cgpa');
   const [waiverPct, setWaiverPct] = useState<number | undefined>();
   const [scholarshipPct, setScholarshipPct] = useState<number | undefined>();
+  const [trimesterFee, setTrimesterFee] = useState<number>(6500);
 
   // Force dark theme on mount
   useEffect(() => {
@@ -197,26 +198,29 @@ function App() {
   const formatPercent = (p?: number) => (p ? `${p}%` : 'None');
 
   const discountedTuition = (() => {
-    const base = tuitionTotal ?? 0;
-    if (base <= 0) return { amount: 0, steps: [] as { after: number; pct: number }[] };
+    const main = tuitionTotal ?? 0;
+    const term = trimesterFee ?? 0;
+    if (main <= 0) return { amount: 0, steps: [] as { after: number; pct: number }[], baseNet: 0, amountNet: 0, main, term };
+    const baseNet = +(Math.max(0, main - term)).toFixed(2);
     const selected = [waiverPct, scholarshipPct].filter((v): v is number => typeof v === 'number' && v > 0);
     const sorted = [...selected].sort((a, b) => a - b);
-    let amount = base;
+    let amountNet = baseNet;
     const steps: { after: number; pct: number }[] = [];
     for (const pct of sorted) {
-      amount = +(amount * (1 - pct / 100)).toFixed(2);
-      steps.push({ after: amount, pct });
+      amountNet = +(amountNet * (1 - pct / 100)).toFixed(2);
+      steps.push({ after: amountNet, pct });
     }
-    return { amount, steps };
+    const finalTotal = +(amountNet + term).toFixed(2);
+    return { amount: finalTotal, steps, baseNet, amountNet, main, term };
   })();
 
   const tuitionBreakdown = (() => {
     if (!tuitionTotal || tuitionTotal <= 0) return null;
-    const base = discountedTuition.amount || 0;
-    const first = +(base * 0.4).toFixed(2);
-    const second = +(base * 0.3).toFixed(2);
-    const third = +(base - first - second).toFixed(2);
-    return { first, second, third, total: +base.toFixed(2) };
+    const total = discountedTuition.amount || 0; // final payable after discounts + trimester fee added back
+    const first = +(total * 0.4).toFixed(2);
+    const second = +(total * 0.3).toFixed(2);
+    const third = +(total - first - second).toFixed(2);
+    return { first, second, third, total: +total.toFixed(2) };
   })();
 
   // Installment due dates (static display)
@@ -462,6 +466,19 @@ function App() {
                   className="w-full bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white p-2 rounded border border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 placeholder-gray-500 text-sm sm:text-base transition-colors duration-300"
                 />
               </div>
+              <div className="col-span-1 sm:col-span-2">
+                <label className="block mb-2 text-sm sm:text-base">Trimester Fee</label>
+                <input
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={trimesterFee}
+                  onChange={(e) => setTrimesterFee(e.target.value ? Number(e.target.value) : 0)}
+                  placeholder="Default 6500"
+                  className="w-full bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white p-2 rounded border border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 placeholder-gray-500 text-sm sm:text-base transition-colors duration-300"
+                />
+                <p className="text-xs text-gray-500 mt-1">Default is 6500. Change it if needed.</p>
+              </div>
 
               {/* Waiver selection */}
               <div className="col-span-1">
@@ -509,17 +526,17 @@ function App() {
               {tuitionTotal && tuitionTotal > 0 && (
                 <div className="col-span-1 sm:col-span-2 bg-gray-50 dark:bg-gray-800 p-3 rounded-lg">
                   <div className="text-sm text-gray-700 dark:text-gray-300 flex flex-col gap-1">
-                    <div>Gross Total: <span className="font-semibold">{formatAmount(tuitionTotal)}</span></div>
-                    {(waiverPct || scholarshipPct) ? (
+                    <div>Entered Total: <span className="font-semibold">{formatAmount(tuitionTotal)}</span></div>
+                    {(waiverPct || scholarshipPct) && discountedTuition.steps.length > 0 ? (
                       <>
                         {discountedTuition.steps.map((s, idx) => (
                           <div key={idx}>After {s.pct}%: <span className="font-semibold">{formatAmount(s.after)}</span></div>
                         ))}
                         <div>Final Payable: <span className="font-semibold text-green-600">{formatAmount(discountedTuition.amount)}</span></div>
-                        <div>You save: <span className="font-semibold text-orange-500">{formatAmount(+((tuitionTotal - discountedTuition.amount).toFixed(2)))}</span></div>
+                        <div>You save: <span className="font-semibold text-orange-500">{formatAmount(+((discountedTuition.main - discountedTuition.amount).toFixed(2)))}</span></div>
                       </>
                     ) : (
-                      <div>Final Payable: <span className="font-semibold">{formatAmount(tuitionTotal)}</span></div>
+                      <div>Final Payable: <span className="font-semibold">{formatAmount(discountedTuition.amount)}</span></div>
                     )}
                   </div>
                 </div>
