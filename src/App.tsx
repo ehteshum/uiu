@@ -226,14 +226,14 @@ function App() {
 
   // Installment due dates (static display)
   const installmentDates = {
-    first: 'Aug 13, 2025',
-    second: 'Sep 14, 2025',
-    third: 'Oct 12, 2025',
+    first: 'Dec 10, 2025',
+    second: 'Jan 11, 2026',
+    third: 'Feb 8, 2026',
   } as const;
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-black text-gray-900 dark:text-white p-3 sm:p-6 transition-colors duration-300">
-      <div className="max-w-3xl mx-auto">
+    <div className="min-h-screen bg-gray-100 dark:bg-black text-gray-900 dark:text-white p-3 sm:p-6 transition-colors duration-300 safe-px safe-pt safe-pb">
+      <div className="w-full max-w-3xl mx-auto">
         <div className="flex justify-end mb-4">
           <button
             onClick={toggleTheme}
@@ -243,14 +243,14 @@ function App() {
             {theme === 'dark' ? <Sun className="text-yellow-500" size={24} /> : <Moon className="text-blue-500" size={24} />}
           </button>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-bold text-center mb-2">
+  <h1 className="text-2xl sm:text-4xl font-bold text-center mb-2 leading-tight">
           <span className="text-orange-500">UIU</span> CGPA CALCULATOR
         </h1>
         <p className="text-center mb-1 text-sm sm:text-base flex items-center justify-center gap-2">
           <Code2 size={20} className="text-orange-500" />
           Developed by <span className="text-orange-500 font-semibold hover:text-orange-400 transition-colors cursor-default">Ishmam</span>
         </p>
-        <div className="flex items-center justify-center gap-2 mb-6 sm:mb-8">
+  <div className="flex flex-wrap items-center justify-center gap-2 mb-6 sm:mb-8">
           <span className="text-sm sm:text-base">Contact:</span>
           <a 
             href="https://www.facebook.com/ishmamr.1" 
@@ -263,7 +263,7 @@ function App() {
         </div>
 
         {/* Tabs */}
-        <div className="mb-4 sm:mb-6 flex gap-2">
+  <div className="mb-4 sm:mb-6 flex flex-wrap gap-2">
           <button
             onClick={() => setActiveTab('cgpa')}
             className={`px-4 py-2 rounded-lg font-semibold transition-all ${
@@ -318,7 +318,7 @@ function App() {
             <div className="bg-white dark:bg-gray-900 p-3 sm:p-6 rounded-lg mb-4 sm:mb-6 shadow-md transition-colors duration-300">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 mb-4">
                 <h2 className="text-lg sm:text-xl font-semibold">Current Trimester Courses</h2>
-                <div className="flex gap-2 w-full sm:w-auto">
+                <div className="flex gap-2 w-full sm:w-auto flex-wrap">
                   <button
                     onClick={addCourse}
                     className="flex-1 sm:flex-none bg-orange-500 text-white px-4 sm:px-6 py-2 rounded-lg hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95 font-semibold flex items-center justify-center sm:justify-start gap-2 text-sm sm:text-base"
@@ -549,17 +549,41 @@ function App() {
                   <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg">
                     <p className="text-sm text-gray-600 dark:text-gray-300">First Payment (40%)</p>
                     <p className="text-2xl font-bold text-green-600">{formatAmount(tuitionBreakdown.first)}</p>
-                    <p className="text-xs text-gray-500 mt-1">Last Date: {installmentDates.first}{weekdayOf(installmentDates.first) ? ` (${weekdayOf(installmentDates.first)})` : ''}</p>
+                    <p className="mt-2">
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-200 border border-yellow-200/80 dark:border-yellow-700/50 text-xs">
+                        <span className="opacity-80">Last Date:</span>
+                        <span className="font-semibold">
+                          {installmentDates.first}
+                          {weekdayOf(installmentDates.first) ? ` (${weekdayOf(installmentDates.first)})` : ''}
+                        </span>
+                      </span>
+                    </p>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg">
                     <p className="text-sm text-gray-600 dark:text-gray-300">Second Payment (30%)</p>
                     <p className="text-2xl font-bold text-green-600">{formatAmount(tuitionBreakdown.second)}</p>
-                    <p className="text-xs text-gray-500 mt-1">Last Date: {installmentDates.second}{weekdayOf(installmentDates.second) ? ` (${weekdayOf(installmentDates.second)})` : ''}</p>
+                    <p className="mt-2">
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-200 border border-yellow-200/80 dark:border-yellow-700/50 text-xs">
+                        <span className="opacity-80">Last Date:</span>
+                        <span className="font-semibold">
+                          {installmentDates.second}
+                          {weekdayOf(installmentDates.second) ? ` (${weekdayOf(installmentDates.second)})` : ''}
+                        </span>
+                      </span>
+                    </p>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg">
                     <p className="text-sm text-gray-600 dark:text-gray-300">Third Payment (30%)</p>
                     <p className="text-2xl font-bold text-green-600">{formatAmount(tuitionBreakdown.third)}</p>
-                    <p className="text-xs text-gray-500 mt-1">Last Date: {installmentDates.third}{weekdayOf(installmentDates.third) ? ` (${weekdayOf(installmentDates.third)})` : ''}</p>
+                    <p className="mt-2">
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-200 border border-yellow-200/80 dark:border-yellow-700/50 text-xs">
+                        <span className="opacity-80">Last Date:</span>
+                        <span className="font-semibold">
+                          {installmentDates.third}
+                          {weekdayOf(installmentDates.third) ? ` (${weekdayOf(installmentDates.third)})` : ''}
+                        </span>
+                      </span>
+                    </p>
                   </div>
                   <div className="bg-gray-100 dark:bg-gray-800/80 p-3 rounded-lg">
                     <p className="text-sm text-gray-600 dark:text-gray-300">Total</p>
@@ -587,7 +611,7 @@ function App() {
             />
             
             <div 
-              className={`relative bg-white dark:bg-gray-900 p-6 rounded-lg w-full max-w-2xl transform transition-all duration-300 ${
+              className={`relative bg-white dark:bg-gray-900 p-4 sm:p-6 rounded-lg w-full max-w-2xl mx-3 sm:mx-0 max-h-[85vh] overflow-y-auto overscroll-contain transform transition-all duration-300 ${
                 isModalClosing 
                   ? 'opacity-0 scale-95 translate-y-4' 
                   : 'opacity-100 scale-100 translate-y-0'

@@ -9,3 +9,22 @@
 .light {
   color-scheme: light;
 }
+
+/* Avoid iOS input zoom by ensuring form controls are at least 16px */
+input, select, textarea {
+  font-size: 16px;
+}
+
+/* Safe area utilities for devices with notches (iPhone, Android punch-hole) */
+@supports (padding: max(0px)) {
+  .safe-px {
+    padding-left: max(0.75rem, env(safe-area-inset-left));
+    padding-right: max(0.75rem, env(safe-area-inset-right));
+  }
+  .safe-pt {
+    padding-top: max(0.75rem, env(safe-area-inset-top));
+  }
+  .safe-pb {
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+}
