@@ -448,6 +448,14 @@ function App() {
               </div>
             </div>
 
+            <button
+              onClick={handleCalculateClick}
+              className="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95 font-bold text-base sm:text-lg flex items-center justify-center gap-2 mb-4 sm:mb-6"
+            >
+              <Calculator size={24} />
+              Calculate
+            </button>
+
             <div className="bg-white dark:bg-gray-900 p-3 sm:p-6 rounded-lg mb-4 sm:mb-6 shadow-md transition-colors duration-300">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 mb-4">
                 <h2 className="text-lg sm:text-xl font-semibold">Current Trimester Courses</h2>
@@ -568,14 +576,6 @@ function App() {
                 </div>
               ))}
             </div>
-
-            <button
-              onClick={handleCalculateClick}
-              className="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95 font-bold text-base sm:text-lg flex items-center justify-center gap-2"
-            >
-              <Calculator size={24} />
-              Calculate
-            </button>
           </>
         )}
 
