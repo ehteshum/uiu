@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Facebook, PlusCircle, Trash2, Calculator, GraduationCap, Code2, RefreshCw, X, Sun, Moon, Banknote } from 'lucide-react';
+import { Facebook, PlusCircle, Trash2, Calculator, GraduationCap, Code2, RefreshCw, X, Sun, Moon, Banknote, Target, RotateCcw } from 'lucide-react';
 // Confetti removed to improve performance
 
 interface Course {
@@ -35,19 +35,101 @@ if (typeof document !== 'undefined') {
 }
 
 function App() {
-  const [completedCredit, setCompletedCredit] = useState<number | undefined>();
-  const [currentCGPA, setCurrentCGPA] = useState<number | undefined>();
-  const [courses, setCourses] = useState<any[]>([]);
-  const [retakes, setRetakes] = useState<any[]>([]);
+  const [completedCredit, setCompletedCredit] = useState<number | undefined>(() => {
+    const saved = localStorage.getItem('completedCredit');
+    return saved ? Number(saved) : undefined;
+  });
+  const [currentCGPA, setCurrentCGPA] = useState<number | undefined>(() => {
+    const saved = localStorage.getItem('currentCGPA');
+    return saved ? Number(saved) : undefined;
+  });
+  const [courses, setCourses] = useState<any[]>(() => {
+    const saved = localStorage.getItem('courses');
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [retakes, setRetakes] = useState<any[]>(() => {
+    const saved = localStorage.getItem('retakes');
+    return saved ? JSON.parse(saved) : [];
+  });
   const [showResults, setShowResults] = useState(false);
   const [isModalClosing, setIsModalClosing] = useState(false);
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   // Confetti state removed
-  const [tuitionTotal, setTuitionTotal] = useState<number | undefined>();
-  const [activeTab, setActiveTab] = useState<'cgpa' | 'tuition'>('cgpa');
-  const [waiverPct, setWaiverPct] = useState<number | undefined>();
-  const [scholarshipPct, setScholarshipPct] = useState<number | undefined>();
-  const [trimesterFee, setTrimesterFee] = useState<number>(6500);
+  const [tuitionTotal, setTuitionTotal] = useState<number | undefined>(() => {
+    const saved = localStorage.getItem('tuitionTotal');
+    return saved ? Number(saved) : undefined;
+  });
+  const [activeTab, setActiveTab] = useState<'cgpa' | 'tuition' | 'target'>('cgpa');
+  const [waiverPct, setWaiverPct] = useState<number | undefined>(() => {
+    const saved = localStorage.getItem('waiverPct');
+    return saved ? Number(saved) : undefined;
+  });
+  const [scholarshipPct, setScholarshipPct] = useState<number | undefined>(() => {
+    const saved = localStorage.getItem('scholarshipPct');
+    return saved ? Number(saved) : undefined;
+  });
+  const [trimesterFee, setTrimesterFee] = useState<number>(() => {
+    const saved = localStorage.getItem('trimesterFee');
+    return saved ? Number(saved) : 6500;
+  });
+
+  // Target CGPA states
+  const [targetCGPA, setTargetCGPA] = useState<number | undefined>(() => {
+    const saved = localStorage.getItem('targetCGPA');
+    return saved ? Number(saved) : undefined;
+  });
+  const [targetCredits, setTargetCredits] = useState<number | undefined>(() => {
+    const saved = localStorage.getItem('targetCredits');
+    return saved ? Number(saved) : undefined;
+  });
+
+  // Persist state changes
+  useEffect(() => {
+    if (completedCredit !== undefined) localStorage.setItem('completedCredit', String(completedCredit));
+    else localStorage.removeItem('completedCredit');
+  }, [completedCredit]);
+
+  useEffect(() => {
+    if (currentCGPA !== undefined) localStorage.setItem('currentCGPA', String(currentCGPA));
+    else localStorage.removeItem('currentCGPA');
+  }, [currentCGPA]);
+
+  useEffect(() => {
+    localStorage.setItem('courses', JSON.stringify(courses));
+  }, [courses]);
+
+  useEffect(() => {
+    localStorage.setItem('retakes', JSON.stringify(retakes));
+  }, [retakes]);
+
+  useEffect(() => {
+    if (tuitionTotal !== undefined) localStorage.setItem('tuitionTotal', String(tuitionTotal));
+    else localStorage.removeItem('tuitionTotal');
+  }, [tuitionTotal]);
+
+  useEffect(() => {
+    if (waiverPct !== undefined) localStorage.setItem('waiverPct', String(waiverPct));
+    else localStorage.removeItem('waiverPct');
+  }, [waiverPct]);
+
+  useEffect(() => {
+    if (scholarshipPct !== undefined) localStorage.setItem('scholarshipPct', String(scholarshipPct));
+    else localStorage.removeItem('scholarshipPct');
+  }, [scholarshipPct]);
+
+  useEffect(() => {
+    localStorage.setItem('trimesterFee', String(trimesterFee));
+  }, [trimesterFee]);
+
+  useEffect(() => {
+    if (targetCGPA !== undefined) localStorage.setItem('targetCGPA', String(targetCGPA));
+    else localStorage.removeItem('targetCGPA');
+  }, [targetCGPA]);
+
+  useEffect(() => {
+    if (targetCredits !== undefined) localStorage.setItem('targetCredits', String(targetCredits));
+    else localStorage.removeItem('targetCredits');
+  }, [targetCredits]);
 
   // Force dark theme on mount
   useEffect(() => {
@@ -184,9 +266,39 @@ function App() {
       sum + (course.credit ? Number(course.credit) : 0), 0);
   };
 
+  const handleReset = () => {
+    if (confirm('Are you sure you want to clear all data?')) {
+      setCompletedCredit(undefined);
+      setCurrentCGPA(undefined);
+      setCourses([]);
+      setRetakes([]);
+      setTuitionTotal(undefined);
+      setWaiverPct(undefined);
+      setScholarshipPct(undefined);
+      setTrimesterFee(6500);
+      setTargetCGPA(undefined);
+      setTargetCredits(undefined);
+      localStorage.clear();
+      // Restore theme preference
+      localStorage.setItem('theme', theme);
+    }
+  };
+
   const handleCalculateClick = () => {
     const newCGPA = calculateCGPA();
     setShowResults(true);
+  };
+
+  const calculateTargetGPA = () => {
+    if (!currentCGPA || !completedCredit || !targetCGPA || !targetCredits) return null;
+    
+    const currentPoints = currentCGPA * completedCredit;
+    const totalCredits = completedCredit + targetCredits;
+    const targetPoints = targetCGPA * totalCredits;
+    const requiredPoints = targetPoints - currentPoints;
+    const requiredGPA = requiredPoints / targetCredits;
+    
+    return requiredGPA;
   };
 
   // Tuition helpers
@@ -234,7 +346,15 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-black text-gray-900 dark:text-white p-3 sm:p-6 transition-colors duration-300 safe-px safe-pt safe-pb">
       <div className="w-full max-w-3xl mx-auto">
-        <div className="flex justify-end mb-4">
+        <div className="flex justify-end mb-4 gap-2">
+          <button
+            onClick={handleReset}
+            className="p-2 rounded-lg bg-red-100 dark:bg-red-900/30 hover:bg-red-200 dark:hover:bg-red-900/50 text-red-600 dark:text-red-400 transition-colors duration-300"
+            aria-label="Reset all data"
+            title="Reset all data"
+          >
+            <RotateCcw size={24} />
+          </button>
           <button
             onClick={toggleTheme}
             className="p-2 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors duration-300"
@@ -263,7 +383,7 @@ function App() {
         </div>
 
         {/* Tabs */}
-  <div className="mb-4 sm:mb-6 flex flex-wrap gap-2">
+        <div className="mb-4 sm:mb-6 flex flex-wrap gap-2">
           <button
             onClick={() => setActiveTab('cgpa')}
             className={`px-4 py-2 rounded-lg font-semibold transition-all ${
@@ -283,6 +403,17 @@ function App() {
             }`}
           >
             Tuition Fee
+          </button>
+          <button
+            onClick={() => setActiveTab('target')}
+            className={`px-4 py-2 rounded-lg font-semibold transition-all flex items-center gap-2 ${
+              activeTab === 'target'
+                ? 'bg-purple-600 text-white hover:bg-purple-700'
+                : 'bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200'
+            }`}
+          >
+            <Target size={18} />
+            Target CGPA
           </button>
         </div>
 
@@ -444,6 +575,95 @@ function App() {
               Calculate
             </button>
           </>
+        )}
+
+        {activeTab === 'target' && (
+          <div className="bg-white dark:bg-gray-900 p-3 sm:p-6 rounded-lg mb-4 sm:mb-6 shadow-md transition-colors duration-300">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg sm:text-xl font-semibold flex items-center gap-2">
+                <Target size={22} className="text-purple-500" />
+                Target CGPA Calculator
+              </h2>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6">
+              <div className="bg-gray-50 dark:bg-gray-800 p-3 sm:p-4 rounded-lg">
+                <label className="block mb-2 text-sm sm:text-base">Current CGPA</label>
+                <input
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  max="4.00"
+                  value={currentCGPA || ''}
+                  onChange={(e) => setCurrentCGPA(e.target.value ? Number(e.target.value) : undefined)}
+                  placeholder="e.g., 3.50"
+                  className="w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-2 rounded border border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder-gray-500 text-sm sm:text-base transition-colors duration-300"
+                />
+              </div>
+              <div className="bg-gray-50 dark:bg-gray-800 p-3 sm:p-4 rounded-lg">
+                <label className="block mb-2 text-sm sm:text-base">Completed Credits</label>
+                <input
+                  type="number"
+                  min="0"
+                  value={completedCredit || ''}
+                  onChange={(e) => setCompletedCredit(e.target.value ? Number(e.target.value) : undefined)}
+                  placeholder="e.g., 60"
+                  className="w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-2 rounded border border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder-gray-500 text-sm sm:text-base transition-colors duration-300"
+                />
+              </div>
+              <div className="bg-gray-50 dark:bg-gray-800 p-3 sm:p-4 rounded-lg">
+                <label className="block mb-2 text-sm sm:text-base">Target CGPA</label>
+                <input
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  max="4.00"
+                  value={targetCGPA || ''}
+                  onChange={(e) => setTargetCGPA(e.target.value ? Number(e.target.value) : undefined)}
+                  placeholder="e.g., 3.60"
+                  className="w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-2 rounded border border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder-gray-500 text-sm sm:text-base transition-colors duration-300"
+                />
+              </div>
+              <div className="bg-gray-50 dark:bg-gray-800 p-3 sm:p-4 rounded-lg">
+                <label className="block mb-2 text-sm sm:text-base">Credits This Trimester</label>
+                <input
+                  type="number"
+                  min="0"
+                  value={targetCredits || ''}
+                  onChange={(e) => setTargetCredits(e.target.value ? Number(e.target.value) : undefined)}
+                  placeholder="e.g., 12"
+                  className="w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-2 rounded border border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder-gray-500 text-sm sm:text-base transition-colors duration-300"
+                />
+              </div>
+            </div>
+
+            {calculateTargetGPA() !== null && (
+              <div className="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg border border-purple-200 dark:border-purple-800">
+                <p className="text-center text-sm text-gray-600 dark:text-gray-300 mb-2">
+                  To reach a CGPA of <span className="font-bold text-purple-600 dark:text-purple-400">{targetCGPA?.toFixed(2)}</span>, you need a GPA of:
+                </p>
+                <p className={`text-3xl sm:text-4xl font-bold text-center ${
+                  (calculateTargetGPA() || 0) > 4.0 
+                    ? 'text-red-500' 
+                    : (calculateTargetGPA() || 0) < 0 
+                      ? 'text-green-500' 
+                      : 'text-purple-600 dark:text-purple-400'
+                }`}>
+                  {(calculateTargetGPA() || 0).toFixed(2)}
+                </p>
+                {(calculateTargetGPA() || 0) > 4.0 && (
+                  <p className="text-center text-red-500 text-sm mt-2 font-medium">
+                    Impossible! Even with a 4.00, you cannot reach this CGPA this trimester.
+                  </p>
+                )}
+                {(calculateTargetGPA() || 0) <= 0 && (
+                  <p className="text-center text-green-500 text-sm mt-2 font-medium">
+                    You already have this CGPA or higher!
+                  </p>
+                )}
+              </div>
+            )}
+          </div>
         )}
 
         {activeTab === 'tuition' && (
