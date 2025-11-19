@@ -386,22 +386,24 @@ function App() {
         <div className="mb-4 sm:mb-6 flex flex-wrap gap-2">
           <button
             onClick={() => setActiveTab('cgpa')}
-            className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+            className={`px-4 py-2 rounded-lg font-semibold transition-all flex items-center gap-2 ${
               activeTab === 'cgpa'
                 ? 'bg-orange-500 text-white hover:bg-orange-600'
                 : 'bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200'
             }`}
           >
+            <GraduationCap size={18} />
             CGPA Calculator
           </button>
           <button
             onClick={() => setActiveTab('tuition')}
-            className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+            className={`px-4 py-2 rounded-lg font-semibold transition-all flex items-center gap-2 ${
               activeTab === 'tuition'
                 ? 'bg-green-600 text-white hover:bg-green-700'
                 : 'bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200'
             }`}
           >
+            <Banknote size={18} />
             Tuition Fee
           </button>
           <button
