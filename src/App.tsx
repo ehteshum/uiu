@@ -383,39 +383,42 @@ function App() {
         </div>
 
         {/* Tabs */}
-        <div className="mb-4 sm:mb-6 flex flex-wrap gap-2">
+        <div className="mb-4 sm:mb-6 grid grid-cols-3 gap-2">
           <button
             onClick={() => setActiveTab('cgpa')}
-            className={`px-4 py-2 rounded-lg font-semibold transition-all flex items-center gap-2 ${
+            className={`px-2 sm:px-4 py-2 rounded-lg font-semibold transition-all flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-base ${
               activeTab === 'cgpa'
                 ? 'bg-orange-500 text-white hover:bg-orange-600'
                 : 'bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200'
             }`}
           >
-            <GraduationCap size={18} />
-            CGPA Calculator
+            <GraduationCap size={16} className="sm:w-[18px] sm:h-[18px]" />
+            <span className="hidden sm:inline">CGPA Calculator</span>
+            <span className="sm:hidden">CGPA</span>
           </button>
           <button
             onClick={() => setActiveTab('tuition')}
-            className={`px-4 py-2 rounded-lg font-semibold transition-all flex items-center gap-2 ${
+            className={`px-2 sm:px-4 py-2 rounded-lg font-semibold transition-all flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-base ${
               activeTab === 'tuition'
                 ? 'bg-green-600 text-white hover:bg-green-700'
                 : 'bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200'
             }`}
           >
-            <Banknote size={18} />
-            Tuition Fee
+            <Banknote size={16} className="sm:w-[18px] sm:h-[18px]" />
+            <span className="hidden sm:inline">Tuition Fee</span>
+            <span className="sm:hidden">Tuition</span>
           </button>
           <button
             onClick={() => setActiveTab('target')}
-            className={`px-4 py-2 rounded-lg font-semibold transition-all flex items-center gap-2 ${
+            className={`px-2 sm:px-4 py-2 rounded-lg font-semibold transition-all flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-base ${
               activeTab === 'target'
                 ? 'bg-purple-600 text-white hover:bg-purple-700'
                 : 'bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200'
             }`}
           >
-            <Target size={18} />
-            Target CGPA
+            <Target size={16} className="sm:w-[18px] sm:h-[18px]" />
+            <span className="hidden sm:inline">Target CGPA</span>
+            <span className="sm:hidden">Target</span>
           </button>
         </div>
 
