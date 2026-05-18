@@ -338,9 +338,9 @@ function App() {
 
   // Installment due dates (static display)
   const installmentDates = {
-    first: 'Dec 10, 2025',
-    second: 'Jan 11, 2026',
-    third: 'Feb 8, 2026',
+    first: 'Apr 12, 2026',
+    second: 'May 12, 2026',
+    third: 'June 14, 2026',
   } as const;
 
   return (
