@@ -1,0 +1,212 @@
+{
+  "communities": {
+    "0": [
+      "uiu_tsconfig_compileroptions",
+      "uiu_tsconfig_compileroptions_allowjs",
+      "uiu_tsconfig_compileroptions_esmoduleinterop",
+      "uiu_tsconfig_compileroptions_incremental",
+      "uiu_tsconfig_compileroptions_isolatedmodules",
+      "uiu_tsconfig_compileroptions_jsx",
+      "uiu_tsconfig_compileroptions_lib",
+      "uiu_tsconfig_compileroptions_module",
+      "uiu_tsconfig_compileroptions_moduleresolution",
+      "uiu_tsconfig_compileroptions_noemit",
+      "uiu_tsconfig_compileroptions_paths",
+      "uiu_tsconfig_compileroptions_plugins",
+      "uiu_tsconfig_compileroptions_resolvejsonmodule",
+      "uiu_tsconfig_compileroptions_skiplibcheck",
+      "uiu_tsconfig_compileroptions_strict",
+      "uiu_tsconfig_compileroptions_target",
+      "uiu_tsconfig_exclude",
+      "uiu_tsconfig_include",
+      "uiu_tsconfig_json",
+      "uiu_tsconfig_paths"
+    ],
+    "1": [
+      "uiu_package_dependencies_next",
+      "uiu_package_json",
+      "uiu_package_json_uiu_package_dependencies",
+      "uiu_package_json_uiu_package_dependencies_react",
+      "uiu_package_json_uiu_package_dependencies_react_dom",
+      "uiu_package_json_uiu_package_name",
+      "uiu_package_json_uiu_package_private",
+      "uiu_package_json_uiu_package_scripts",
+      "uiu_package_json_uiu_package_scripts_build",
+      "uiu_package_json_uiu_package_scripts_dev",
+      "uiu_package_json_uiu_package_version",
+      "uiu_package_overrides",
+      "uiu_package_overrides_postcss",
+      "uiu_package_scripts_lint",
+      "uiu_package_scripts_start"
+    ],
+    "2": [
+      "package_json",
+      "package_json_uiu_package_dependencies",
+      "package_json_uiu_package_dependencies_react",
+      "package_json_uiu_package_dependencies_react_dom",
+      "package_json_uiu_package_name",
+      "package_json_uiu_package_private",
+      "package_json_uiu_package_scripts",
+      "package_json_uiu_package_scripts_build",
+      "package_json_uiu_package_scripts_dev",
+      "package_json_uiu_package_version",
+      "uiu_package_dependencies_lucide_react",
+      "uiu_package_dependencies_react_confetti",
+      "uiu_package_scripts_preview",
+      "uiu_package_type"
+    ],
+    "3": [
+      "src_app_course",
+      "src_app_parsestoredarray",
+      "src_app_parsestoredduedates",
+      "src_app_retake",
+      "src_app_savedtheme",
+      "src_app_tsx",
+      "src_app_tsx_src_app_app",
+      "src_app_tsx_src_app_creditoptions",
+      "src_app_tsx_src_app_gradepoints",
+      "src_main_jsx",
+      "src_main_tsx"
+    ],
+    "4": [
+      "uiu_package_devdependencies_eslint",
+      "uiu_package_devdependencies_eslint_config_next",
+      "uiu_package_devdependencies_eslint_eslintrc",
+      "uiu_package_devdependencies_types_node",
+      "uiu_package_devdependencies_types_react",
+      "uiu_package_devdependencies_types_react_dom",
+      "uiu_package_devdependencies_typescript",
+      "uiu_package_json_uiu_package_devdependencies",
+      "uiu_package_json_uiu_package_devdependencies_postcss",
+      "uiu_package_json_uiu_package_devdependencies_tailwindcss"
+    ],
+    "5": [
+      "package_json_uiu_package_devdependencies",
+      "package_json_uiu_package_devdependencies_postcss",
+      "package_json_uiu_package_devdependencies_tailwindcss",
+      "uiu_package_devdependencies_autoprefixer",
+      "uiu_package_devdependencies_vite",
+      "uiu_package_devdependencies_vitejs_plugin_react"
+    ],
+    "6": [
+      "app_layout_geistmono",
+      "app_layout_geistsans",
+      "app_layout_metadata",
+      "app_layout_rootlayout",
+      "uiu_src_app_layout_tsx"
+    ],
+    "7": [
+      "uiu_eslint_config_compat",
+      "uiu_eslint_config_dirname",
+      "uiu_eslint_config_eslintconfig",
+      "uiu_eslint_config_filename",
+      "uiu_eslint_config_mjs"
+    ],
+    "8": [
+      "puku_config_editor_inlinesuggest_enabled",
+      "puku_config_files_autosave",
+      "puku_config_json",
+      "puku_config_puku_embeddings_token"
+    ],
+    "9": [
+      "src_app_jsx",
+      "src_app_jsx_src_app_app",
+      "src_app_jsx_src_app_creditoptions",
+      "src_app_jsx_src_app_gradepoints"
+    ],
+    "10": [
+      "bolt_config_json",
+      "bolt_config_template"
+    ],
+    "11": [
+      "uiu_next_config_nextconfig",
+      "uiu_next_config_ts"
+    ],
+    "12": [
+      "uiu_postcss_config_config",
+      "uiu_postcss_config_mjs"
+    ],
+    "13": [
+      "app_page_home",
+      "uiu_src_app_page_tsx"
+    ],
+    "14": [
+      "app_tsx"
+    ],
+    "15": [
+      "fix_button_ps1"
+    ],
+    "16": [
+      "postcss_config_js"
+    ],
+    "17": [
+      "tailwind_config_js"
+    ],
+    "18": [
+      "vite_config_js"
+    ],
+    "19": [
+      "src_vite_env_d_ts"
+    ],
+    "20": [
+      "uiu_next_env_d_ts"
+    ],
+    "21": [
+      "uiu_tailwind_config_ts"
+    ]
+  },
+  "cohesion": {},
+  "god_nodes": [
+    {
+      "id": "uiu_tsconfig_compileroptions",
+      "label": "compilerOptions",
+      "degree": 16
+    },
+    {
+      "id": "uiu_package_json_uiu_package_scripts",
+      "label": "scripts",
+      "degree": 5
+    },
+    {
+      "id": "package_json_uiu_package_scripts",
+      "label": "scripts",
+      "degree": 4
+    },
+    {
+      "id": "uiu_package_overrides",
+      "label": "overrides",
+      "degree": 2
+    },
+    {
+      "id": "uiu_tsconfig_compileroptions_paths",
+      "label": "paths",
+      "degree": 2
+    },
+    {
+      "id": "package_json_uiu_package_private",
+      "label": "private",
+      "degree": 1
+    },
+    {
+      "id": "package_json_uiu_package_scripts_dev",
+      "label": "dev",
+      "degree": 1
+    },
+    {
+      "id": "package_json_uiu_package_scripts_build",
+      "label": "build",
+      "degree": 1
+    },
+    {
+      "id": "uiu_package_scripts_preview",
+      "label": "preview",
+      "degree": 1
+    },
+    {
+      "id": "uiu_package_dependencies_lucide_react",
+      "label": "lucide-react",
+      "degree": 1
+    }
+  ],
+  "surprises": []
+}

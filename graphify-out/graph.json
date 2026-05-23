@@ -1,0 +1,1771 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "App.tsx",
+      "file_type": "code",
+      "source_file": "App.tsx",
+      "source_location": "L1",
+      "id": "app_tsx"
+    },
+    {
+      "label": "fix-button.ps1",
+      "file_type": "code",
+      "source_file": "fix-button.ps1",
+      "source_location": "L1",
+      "id": "fix_button_ps1"
+    },
+    {
+      "label": "package.json",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L1",
+      "id": "package_json"
+    },
+    {
+      "label": "name",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L2",
+      "id": "package_json_uiu_package_name"
+    },
+    {
+      "label": "private",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L3",
+      "id": "package_json_uiu_package_private"
+    },
+    {
+      "label": "version",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L4",
+      "id": "package_json_uiu_package_version"
+    },
+    {
+      "label": "type",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L5",
+      "id": "uiu_package_type"
+    },
+    {
+      "label": "scripts",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L6",
+      "id": "package_json_uiu_package_scripts"
+    },
+    {
+      "label": "dev",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L7",
+      "id": "package_json_uiu_package_scripts_dev"
+    },
+    {
+      "label": "build",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L8",
+      "id": "package_json_uiu_package_scripts_build"
+    },
+    {
+      "label": "preview",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L9",
+      "id": "uiu_package_scripts_preview"
+    },
+    {
+      "label": "dependencies",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L11",
+      "id": "package_json_uiu_package_dependencies"
+    },
+    {
+      "label": "lucide-react",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L12",
+      "id": "uiu_package_dependencies_lucide_react"
+    },
+    {
+      "label": "react",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L13",
+      "id": "package_json_uiu_package_dependencies_react"
+    },
+    {
+      "label": "react-confetti",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L14",
+      "id": "uiu_package_dependencies_react_confetti"
+    },
+    {
+      "label": "react-dom",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L15",
+      "id": "package_json_uiu_package_dependencies_react_dom"
+    },
+    {
+      "label": "devDependencies",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L17",
+      "id": "package_json_uiu_package_devdependencies"
+    },
+    {
+      "label": "@vitejs/plugin-react",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L18",
+      "id": "uiu_package_devdependencies_vitejs_plugin_react"
+    },
+    {
+      "label": "autoprefixer",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L19",
+      "id": "uiu_package_devdependencies_autoprefixer"
+    },
+    {
+      "label": "postcss",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L20",
+      "id": "package_json_uiu_package_devdependencies_postcss"
+    },
+    {
+      "label": "tailwindcss",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L21",
+      "id": "package_json_uiu_package_devdependencies_tailwindcss"
+    },
+    {
+      "label": "vite",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L22",
+      "id": "uiu_package_devdependencies_vite"
+    },
+    {
+      "label": "postcss.config.js",
+      "file_type": "code",
+      "source_file": "postcss.config.js",
+      "source_location": "L1",
+      "id": "postcss_config_js"
+    },
+    {
+      "label": "tailwind.config.js",
+      "file_type": "code",
+      "source_file": "tailwind.config.js",
+      "source_location": "L1",
+      "id": "tailwind_config_js"
+    },
+    {
+      "label": "vite.config.js",
+      "file_type": "code",
+      "source_file": "vite.config.js",
+      "source_location": "L1",
+      "id": "vite_config_js"
+    },
+    {
+      "label": "config.json",
+      "file_type": "code",
+      "source_file": ".bolt/config.json",
+      "source_location": "L1",
+      "id": "bolt_config_json"
+    },
+    {
+      "label": "template",
+      "file_type": "code",
+      "source_file": ".bolt/config.json",
+      "source_location": "L2",
+      "id": "bolt_config_template"
+    },
+    {
+      "label": "config.json",
+      "file_type": "code",
+      "source_file": ".puku/config.json",
+      "source_location": "L1",
+      "id": "puku_config_json"
+    },
+    {
+      "label": "puku.embeddings.token",
+      "file_type": "code",
+      "source_file": ".puku/config.json",
+      "source_location": "L2",
+      "id": "puku_config_puku_embeddings_token"
+    },
+    {
+      "label": "files.autoSave",
+      "file_type": "code",
+      "source_file": ".puku/config.json",
+      "source_location": "L3",
+      "id": "puku_config_files_autosave"
+    },
+    {
+      "label": "editor.inlineSuggest.enabled",
+      "file_type": "code",
+      "source_file": ".puku/config.json",
+      "source_location": "L4",
+      "id": "puku_config_editor_inlinesuggest_enabled"
+    },
+    {
+      "label": "App.jsx",
+      "file_type": "code",
+      "source_file": "src/App.jsx",
+      "source_location": "L1",
+      "id": "src_app_jsx"
+    },
+    {
+      "label": "gradePoints",
+      "file_type": "code",
+      "source_file": "src/App.jsx",
+      "source_location": "L4",
+      "id": "src_app_jsx_src_app_gradepoints"
+    },
+    {
+      "label": "creditOptions",
+      "file_type": "code",
+      "source_file": "src/App.jsx",
+      "source_location": "L18",
+      "id": "src_app_jsx_src_app_creditoptions"
+    },
+    {
+      "label": "App()",
+      "file_type": "code",
+      "source_file": "src/App.jsx",
+      "source_location": "L20",
+      "id": "src_app_jsx_src_app_app"
+    },
+    {
+      "label": "App.tsx",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": "L1",
+      "id": "src_app_tsx"
+    },
+    {
+      "label": "Course",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": "L5",
+      "id": "src_app_course"
+    },
+    {
+      "label": "Retake",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": "L10",
+      "id": "src_app_retake"
+    },
+    {
+      "label": "gradePoints",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": "L16",
+      "id": "src_app_tsx_src_app_gradepoints"
+    },
+    {
+      "label": "creditOptions",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": "L30",
+      "id": "src_app_tsx_src_app_creditoptions"
+    },
+    {
+      "label": "savedTheme",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": "L34",
+      "id": "src_app_savedtheme"
+    },
+    {
+      "label": "parseStoredArray()",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": "L38",
+      "id": "src_app_parsestoredarray"
+    },
+    {
+      "label": "parseStoredDueDates()",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": "L51",
+      "id": "src_app_parsestoredduedates"
+    },
+    {
+      "label": "App()",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": "L69",
+      "id": "src_app_tsx_src_app_app"
+    },
+    {
+      "label": "main.jsx",
+      "file_type": "code",
+      "source_file": "src/main.jsx",
+      "source_location": "L1",
+      "id": "src_main_jsx"
+    },
+    {
+      "label": "main.tsx",
+      "file_type": "code",
+      "source_file": "src/main.tsx",
+      "source_location": "L1",
+      "id": "src_main_tsx"
+    },
+    {
+      "label": "vite-env.d.ts",
+      "file_type": "code",
+      "source_file": "src/vite-env.d.ts",
+      "source_location": "L1",
+      "id": "src_vite_env_d_ts"
+    },
+    {
+      "label": "eslint.config.mjs",
+      "file_type": "code",
+      "source_file": "uiu/eslint.config.mjs",
+      "source_location": "L1",
+      "id": "uiu_eslint_config_mjs"
+    },
+    {
+      "label": "__filename",
+      "file_type": "code",
+      "source_file": "uiu/eslint.config.mjs",
+      "source_location": "L5",
+      "id": "uiu_eslint_config_filename"
+    },
+    {
+      "label": "__dirname",
+      "file_type": "code",
+      "source_file": "uiu/eslint.config.mjs",
+      "source_location": "L6",
+      "id": "uiu_eslint_config_dirname"
+    },
+    {
+      "label": "compat",
+      "file_type": "code",
+      "source_file": "uiu/eslint.config.mjs",
+      "source_location": "L8",
+      "id": "uiu_eslint_config_compat"
+    },
+    {
+      "label": "eslintConfig",
+      "file_type": "code",
+      "source_file": "uiu/eslint.config.mjs",
+      "source_location": "L12",
+      "id": "uiu_eslint_config_eslintconfig"
+    },
+    {
+      "label": "next-env.d.ts",
+      "file_type": "code",
+      "source_file": "uiu/next-env.d.ts",
+      "source_location": "L1",
+      "id": "uiu_next_env_d_ts"
+    },
+    {
+      "label": "next.config.ts",
+      "file_type": "code",
+      "source_file": "uiu/next.config.ts",
+      "source_location": "L1",
+      "id": "uiu_next_config_ts"
+    },
+    {
+      "label": "nextConfig",
+      "file_type": "code",
+      "source_file": "uiu/next.config.ts",
+      "source_location": "L4",
+      "id": "uiu_next_config_nextconfig"
+    },
+    {
+      "label": "package.json",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L1",
+      "id": "uiu_package_json"
+    },
+    {
+      "label": "name",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L2",
+      "id": "uiu_package_json_uiu_package_name"
+    },
+    {
+      "label": "version",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L3",
+      "id": "uiu_package_json_uiu_package_version"
+    },
+    {
+      "label": "private",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L4",
+      "id": "uiu_package_json_uiu_package_private"
+    },
+    {
+      "label": "scripts",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L5",
+      "id": "uiu_package_json_uiu_package_scripts"
+    },
+    {
+      "label": "dev",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L6",
+      "id": "uiu_package_json_uiu_package_scripts_dev"
+    },
+    {
+      "label": "build",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L7",
+      "id": "uiu_package_json_uiu_package_scripts_build"
+    },
+    {
+      "label": "start",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L8",
+      "id": "uiu_package_scripts_start"
+    },
+    {
+      "label": "lint",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L9",
+      "id": "uiu_package_scripts_lint"
+    },
+    {
+      "label": "dependencies",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L11",
+      "id": "uiu_package_json_uiu_package_dependencies"
+    },
+    {
+      "label": "react",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L12",
+      "id": "uiu_package_json_uiu_package_dependencies_react"
+    },
+    {
+      "label": "react-dom",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L13",
+      "id": "uiu_package_json_uiu_package_dependencies_react_dom"
+    },
+    {
+      "label": "next",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L14",
+      "id": "uiu_package_dependencies_next"
+    },
+    {
+      "label": "overrides",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L16",
+      "id": "uiu_package_overrides"
+    },
+    {
+      "label": "postcss",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L17",
+      "id": "uiu_package_overrides_postcss"
+    },
+    {
+      "label": "devDependencies",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L19",
+      "id": "uiu_package_json_uiu_package_devdependencies"
+    },
+    {
+      "label": "typescript",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L20",
+      "id": "uiu_package_devdependencies_typescript"
+    },
+    {
+      "label": "@types/node",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L21",
+      "id": "uiu_package_devdependencies_types_node"
+    },
+    {
+      "label": "@types/react",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L22",
+      "id": "uiu_package_devdependencies_types_react"
+    },
+    {
+      "label": "@types/react-dom",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L23",
+      "id": "uiu_package_devdependencies_types_react_dom"
+    },
+    {
+      "label": "postcss",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L24",
+      "id": "uiu_package_json_uiu_package_devdependencies_postcss"
+    },
+    {
+      "label": "tailwindcss",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L25",
+      "id": "uiu_package_json_uiu_package_devdependencies_tailwindcss"
+    },
+    {
+      "label": "eslint",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L26",
+      "id": "uiu_package_devdependencies_eslint"
+    },
+    {
+      "label": "eslint-config-next",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L27",
+      "id": "uiu_package_devdependencies_eslint_config_next"
+    },
+    {
+      "label": "@eslint/eslintrc",
+      "file_type": "code",
+      "source_file": "uiu/package.json",
+      "source_location": "L28",
+      "id": "uiu_package_devdependencies_eslint_eslintrc"
+    },
+    {
+      "label": "postcss.config.mjs",
+      "file_type": "code",
+      "source_file": "uiu/postcss.config.mjs",
+      "source_location": "L1",
+      "id": "uiu_postcss_config_mjs"
+    },
+    {
+      "label": "config",
+      "file_type": "code",
+      "source_file": "uiu/postcss.config.mjs",
+      "source_location": "L2",
+      "id": "uiu_postcss_config_config"
+    },
+    {
+      "label": "tailwind.config.ts",
+      "file_type": "code",
+      "source_file": "uiu/tailwind.config.ts",
+      "source_location": "L1",
+      "id": "uiu_tailwind_config_ts"
+    },
+    {
+      "label": "tsconfig.json",
+      "file_type": "code",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L1",
+      "id": "uiu_tsconfig_json"
+    },
+    {
+      "label": "compilerOptions",
+      "file_type": "code",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L2",
+      "id": "uiu_tsconfig_compileroptions"
+    },
+    {
+      "label": "target",
+      "file_type": "code",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L3",
+      "id": "uiu_tsconfig_compileroptions_target"
+    },
+    {
+      "label": "lib",
+      "file_type": "code",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L4",
+      "id": "uiu_tsconfig_compileroptions_lib"
+    },
+    {
+      "label": "allowJs",
+      "file_type": "code",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L5",
+      "id": "uiu_tsconfig_compileroptions_allowjs"
+    },
+    {
+      "label": "skipLibCheck",
+      "file_type": "code",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L6",
+      "id": "uiu_tsconfig_compileroptions_skiplibcheck"
+    },
+    {
+      "label": "strict",
+      "file_type": "code",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L7",
+      "id": "uiu_tsconfig_compileroptions_strict"
+    },
+    {
+      "label": "noEmit",
+      "file_type": "code",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L8",
+      "id": "uiu_tsconfig_compileroptions_noemit"
+    },
+    {
+      "label": "esModuleInterop",
+      "file_type": "code",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L9",
+      "id": "uiu_tsconfig_compileroptions_esmoduleinterop"
+    },
+    {
+      "label": "module",
+      "file_type": "code",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L10",
+      "id": "uiu_tsconfig_compileroptions_module"
+    },
+    {
+      "label": "moduleResolution",
+      "file_type": "code",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L11",
+      "id": "uiu_tsconfig_compileroptions_moduleresolution"
+    },
+    {
+      "label": "resolveJsonModule",
+      "file_type": "code",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L12",
+      "id": "uiu_tsconfig_compileroptions_resolvejsonmodule"
+    },
+    {
+      "label": "isolatedModules",
+      "file_type": "code",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L13",
+      "id": "uiu_tsconfig_compileroptions_isolatedmodules"
+    },
+    {
+      "label": "jsx",
+      "file_type": "code",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L14",
+      "id": "uiu_tsconfig_compileroptions_jsx"
+    },
+    {
+      "label": "incremental",
+      "file_type": "code",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L15",
+      "id": "uiu_tsconfig_compileroptions_incremental"
+    },
+    {
+      "label": "plugins",
+      "file_type": "code",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L16",
+      "id": "uiu_tsconfig_compileroptions_plugins"
+    },
+    {
+      "label": "paths",
+      "file_type": "code",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L21",
+      "id": "uiu_tsconfig_compileroptions_paths"
+    },
+    {
+      "label": "@/*",
+      "file_type": "code",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L22",
+      "id": "uiu_tsconfig_paths"
+    },
+    {
+      "label": "include",
+      "file_type": "code",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L25",
+      "id": "uiu_tsconfig_include"
+    },
+    {
+      "label": "exclude",
+      "file_type": "code",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L26",
+      "id": "uiu_tsconfig_exclude"
+    },
+    {
+      "label": "layout.tsx",
+      "file_type": "code",
+      "source_file": "uiu/src/app/layout.tsx",
+      "source_location": "L1",
+      "id": "uiu_src_app_layout_tsx"
+    },
+    {
+      "label": "geistSans",
+      "file_type": "code",
+      "source_file": "uiu/src/app/layout.tsx",
+      "source_location": "L5",
+      "id": "app_layout_geistsans"
+    },
+    {
+      "label": "geistMono",
+      "file_type": "code",
+      "source_file": "uiu/src/app/layout.tsx",
+      "source_location": "L10",
+      "id": "app_layout_geistmono"
+    },
+    {
+      "label": "metadata",
+      "file_type": "code",
+      "source_file": "uiu/src/app/layout.tsx",
+      "source_location": "L15",
+      "id": "app_layout_metadata"
+    },
+    {
+      "label": "RootLayout()",
+      "file_type": "code",
+      "source_file": "uiu/src/app/layout.tsx",
+      "source_location": "L20",
+      "id": "app_layout_rootlayout"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "uiu/src/app/page.tsx",
+      "source_location": "L1",
+      "id": "uiu_src_app_page_tsx"
+    },
+    {
+      "label": "Home()",
+      "file_type": "code",
+      "source_file": "uiu/src/app/page.tsx",
+      "source_location": "L3",
+      "id": "app_page_home"
+    }
+  ],
+  "edges": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_src": "package_json",
+      "_tgt": "package_json_uiu_package_name",
+      "source": "package_json",
+      "target": "package_json_uiu_package_name"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "package_json",
+      "_tgt": "package_json_uiu_package_private",
+      "source": "package_json",
+      "target": "package_json_uiu_package_private"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_src": "package_json",
+      "_tgt": "package_json_uiu_package_version",
+      "source": "package_json",
+      "target": "package_json_uiu_package_version"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "package_json",
+      "_tgt": "uiu_package_type",
+      "source": "package_json",
+      "target": "uiu_package_type"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_src": "package_json",
+      "_tgt": "package_json_uiu_package_scripts",
+      "source": "package_json",
+      "target": "package_json_uiu_package_scripts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_src": "package_json",
+      "_tgt": "package_json_uiu_package_dependencies",
+      "source": "package_json",
+      "target": "package_json_uiu_package_dependencies"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_src": "package_json",
+      "_tgt": "package_json_uiu_package_devdependencies",
+      "source": "package_json",
+      "target": "package_json_uiu_package_devdependencies"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_src": "package_json_uiu_package_scripts",
+      "_tgt": "package_json_uiu_package_scripts_dev",
+      "source": "package_json_uiu_package_scripts",
+      "target": "package_json_uiu_package_scripts_dev"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_src": "package_json_uiu_package_scripts",
+      "_tgt": "package_json_uiu_package_scripts_build",
+      "source": "package_json_uiu_package_scripts",
+      "target": "package_json_uiu_package_scripts_build"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_src": "package_json_uiu_package_scripts",
+      "_tgt": "uiu_package_scripts_preview",
+      "source": "package_json_uiu_package_scripts",
+      "target": "uiu_package_scripts_preview"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_src": "package_json_uiu_package_dependencies",
+      "_tgt": "uiu_package_dependencies_lucide_react",
+      "source": "package_json_uiu_package_dependencies",
+      "target": "uiu_package_dependencies_lucide_react"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_src": "package_json_uiu_package_dependencies",
+      "_tgt": "package_json_uiu_package_dependencies_react",
+      "source": "package_json_uiu_package_dependencies",
+      "target": "package_json_uiu_package_dependencies_react"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_src": "package_json_uiu_package_dependencies",
+      "_tgt": "uiu_package_dependencies_react_confetti",
+      "source": "package_json_uiu_package_dependencies",
+      "target": "uiu_package_dependencies_react_confetti"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_src": "package_json_uiu_package_dependencies",
+      "_tgt": "package_json_uiu_package_dependencies_react_dom",
+      "source": "package_json_uiu_package_dependencies",
+      "target": "package_json_uiu_package_dependencies_react_dom"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_src": "package_json_uiu_package_devdependencies",
+      "_tgt": "uiu_package_devdependencies_vitejs_plugin_react",
+      "source": "package_json_uiu_package_devdependencies",
+      "target": "uiu_package_devdependencies_vitejs_plugin_react"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_src": "package_json_uiu_package_devdependencies",
+      "_tgt": "uiu_package_devdependencies_autoprefixer",
+      "source": "package_json_uiu_package_devdependencies",
+      "target": "uiu_package_devdependencies_autoprefixer"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_src": "package_json_uiu_package_devdependencies",
+      "_tgt": "package_json_uiu_package_devdependencies_postcss",
+      "source": "package_json_uiu_package_devdependencies",
+      "target": "package_json_uiu_package_devdependencies_postcss"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_src": "package_json_uiu_package_devdependencies",
+      "_tgt": "package_json_uiu_package_devdependencies_tailwindcss",
+      "source": "package_json_uiu_package_devdependencies",
+      "target": "package_json_uiu_package_devdependencies_tailwindcss"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_src": "package_json_uiu_package_devdependencies",
+      "_tgt": "uiu_package_devdependencies_vite",
+      "source": "package_json_uiu_package_devdependencies",
+      "target": "uiu_package_devdependencies_vite"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".bolt/config.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_src": "bolt_config_json",
+      "_tgt": "bolt_config_template",
+      "source": "bolt_config_json",
+      "target": "bolt_config_template"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".puku/config.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_src": "puku_config_json",
+      "_tgt": "puku_config_puku_embeddings_token",
+      "source": "puku_config_json",
+      "target": "puku_config_puku_embeddings_token"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".puku/config.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "puku_config_json",
+      "_tgt": "puku_config_files_autosave",
+      "source": "puku_config_json",
+      "target": "puku_config_files_autosave"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".puku/config.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_src": "puku_config_json",
+      "_tgt": "puku_config_editor_inlinesuggest_enabled",
+      "source": "puku_config_json",
+      "target": "puku_config_editor_inlinesuggest_enabled"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_src": "src_app_jsx",
+      "_tgt": "src_app_jsx_src_app_gradepoints",
+      "source": "src_app_jsx",
+      "target": "src_app_jsx_src_app_gradepoints"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.jsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_src": "src_app_jsx",
+      "_tgt": "src_app_jsx_src_app_creditoptions",
+      "source": "src_app_jsx",
+      "target": "src_app_jsx_src_app_creditoptions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.jsx",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_src": "src_app_jsx",
+      "_tgt": "src_app_jsx_src_app_app",
+      "source": "src_app_jsx",
+      "target": "src_app_jsx_src_app_app"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "src_app_tsx",
+      "_tgt": "src_app_course",
+      "source": "src_app_tsx",
+      "target": "src_app_course"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_src": "src_app_tsx",
+      "_tgt": "src_app_retake",
+      "source": "src_app_tsx",
+      "target": "src_app_retake"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_src": "src_app_tsx",
+      "_tgt": "src_app_tsx_src_app_gradepoints",
+      "source": "src_app_tsx",
+      "target": "src_app_tsx_src_app_gradepoints"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_src": "src_app_tsx",
+      "_tgt": "src_app_tsx_src_app_creditoptions",
+      "source": "src_app_tsx",
+      "target": "src_app_tsx_src_app_creditoptions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_src": "src_app_tsx",
+      "_tgt": "src_app_savedtheme",
+      "source": "src_app_tsx",
+      "target": "src_app_savedtheme"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_src": "src_app_tsx",
+      "_tgt": "src_app_parsestoredarray",
+      "source": "src_app_tsx",
+      "target": "src_app_parsestoredarray"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_src": "src_app_tsx",
+      "_tgt": "src_app_parsestoredduedates",
+      "source": "src_app_tsx",
+      "target": "src_app_parsestoredduedates"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L69",
+      "weight": 1.0,
+      "_src": "src_app_tsx",
+      "_tgt": "src_app_tsx_src_app_app",
+      "source": "src_app_tsx",
+      "target": "src_app_tsx_src_app_app"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/main.jsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "src_main_jsx",
+      "_tgt": "src_app_tsx",
+      "source": "src_app_tsx",
+      "target": "src_main_jsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/main.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "src_main_tsx",
+      "_tgt": "src_app_tsx",
+      "source": "src_app_tsx",
+      "target": "src_main_tsx"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/eslint.config.mjs",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "uiu_eslint_config_mjs",
+      "_tgt": "uiu_eslint_config_filename",
+      "source": "uiu_eslint_config_mjs",
+      "target": "uiu_eslint_config_filename"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/eslint.config.mjs",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_src": "uiu_eslint_config_mjs",
+      "_tgt": "uiu_eslint_config_dirname",
+      "source": "uiu_eslint_config_mjs",
+      "target": "uiu_eslint_config_dirname"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/eslint.config.mjs",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_src": "uiu_eslint_config_mjs",
+      "_tgt": "uiu_eslint_config_compat",
+      "source": "uiu_eslint_config_mjs",
+      "target": "uiu_eslint_config_compat"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/eslint.config.mjs",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_src": "uiu_eslint_config_mjs",
+      "_tgt": "uiu_eslint_config_eslintconfig",
+      "source": "uiu_eslint_config_mjs",
+      "target": "uiu_eslint_config_eslintconfig"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/next.config.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_src": "uiu_next_config_ts",
+      "_tgt": "uiu_next_config_nextconfig",
+      "source": "uiu_next_config_ts",
+      "target": "uiu_next_config_nextconfig"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_src": "uiu_package_json",
+      "_tgt": "uiu_package_json_uiu_package_name",
+      "source": "uiu_package_json",
+      "target": "uiu_package_json_uiu_package_name"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "uiu_package_json",
+      "_tgt": "uiu_package_json_uiu_package_version",
+      "source": "uiu_package_json",
+      "target": "uiu_package_json_uiu_package_version"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_src": "uiu_package_json",
+      "_tgt": "uiu_package_json_uiu_package_private",
+      "source": "uiu_package_json",
+      "target": "uiu_package_json_uiu_package_private"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "uiu_package_json",
+      "_tgt": "uiu_package_json_uiu_package_scripts",
+      "source": "uiu_package_json",
+      "target": "uiu_package_json_uiu_package_scripts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_src": "uiu_package_json",
+      "_tgt": "uiu_package_json_uiu_package_dependencies",
+      "source": "uiu_package_json",
+      "target": "uiu_package_json_uiu_package_dependencies"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_src": "uiu_package_json",
+      "_tgt": "uiu_package_overrides",
+      "source": "uiu_package_json",
+      "target": "uiu_package_overrides"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_src": "uiu_package_json",
+      "_tgt": "uiu_package_json_uiu_package_devdependencies",
+      "source": "uiu_package_json",
+      "target": "uiu_package_json_uiu_package_devdependencies"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_src": "uiu_package_json_uiu_package_scripts",
+      "_tgt": "uiu_package_json_uiu_package_scripts_dev",
+      "source": "uiu_package_json_uiu_package_scripts",
+      "target": "uiu_package_json_uiu_package_scripts_dev"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_src": "uiu_package_json_uiu_package_scripts",
+      "_tgt": "uiu_package_json_uiu_package_scripts_build",
+      "source": "uiu_package_json_uiu_package_scripts",
+      "target": "uiu_package_json_uiu_package_scripts_build"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_src": "uiu_package_json_uiu_package_scripts",
+      "_tgt": "uiu_package_scripts_start",
+      "source": "uiu_package_json_uiu_package_scripts",
+      "target": "uiu_package_scripts_start"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_src": "uiu_package_json_uiu_package_scripts",
+      "_tgt": "uiu_package_scripts_lint",
+      "source": "uiu_package_json_uiu_package_scripts",
+      "target": "uiu_package_scripts_lint"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_src": "uiu_package_json_uiu_package_dependencies",
+      "_tgt": "uiu_package_json_uiu_package_dependencies_react",
+      "source": "uiu_package_json_uiu_package_dependencies",
+      "target": "uiu_package_json_uiu_package_dependencies_react"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_src": "uiu_package_json_uiu_package_dependencies",
+      "_tgt": "uiu_package_json_uiu_package_dependencies_react_dom",
+      "source": "uiu_package_json_uiu_package_dependencies",
+      "target": "uiu_package_json_uiu_package_dependencies_react_dom"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_src": "uiu_package_json_uiu_package_dependencies",
+      "_tgt": "uiu_package_dependencies_next",
+      "source": "uiu_package_json_uiu_package_dependencies",
+      "target": "uiu_package_dependencies_next"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_src": "uiu_package_overrides",
+      "_tgt": "uiu_package_overrides_postcss",
+      "source": "uiu_package_overrides",
+      "target": "uiu_package_overrides_postcss"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_src": "uiu_package_json_uiu_package_devdependencies",
+      "_tgt": "uiu_package_devdependencies_typescript",
+      "source": "uiu_package_json_uiu_package_devdependencies",
+      "target": "uiu_package_devdependencies_typescript"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_src": "uiu_package_json_uiu_package_devdependencies",
+      "_tgt": "uiu_package_devdependencies_types_node",
+      "source": "uiu_package_json_uiu_package_devdependencies",
+      "target": "uiu_package_devdependencies_types_node"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_src": "uiu_package_json_uiu_package_devdependencies",
+      "_tgt": "uiu_package_devdependencies_types_react",
+      "source": "uiu_package_json_uiu_package_devdependencies",
+      "target": "uiu_package_devdependencies_types_react"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_src": "uiu_package_json_uiu_package_devdependencies",
+      "_tgt": "uiu_package_devdependencies_types_react_dom",
+      "source": "uiu_package_json_uiu_package_devdependencies",
+      "target": "uiu_package_devdependencies_types_react_dom"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_src": "uiu_package_json_uiu_package_devdependencies",
+      "_tgt": "uiu_package_json_uiu_package_devdependencies_postcss",
+      "source": "uiu_package_json_uiu_package_devdependencies",
+      "target": "uiu_package_json_uiu_package_devdependencies_postcss"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_src": "uiu_package_json_uiu_package_devdependencies",
+      "_tgt": "uiu_package_json_uiu_package_devdependencies_tailwindcss",
+      "source": "uiu_package_json_uiu_package_devdependencies",
+      "target": "uiu_package_json_uiu_package_devdependencies_tailwindcss"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_src": "uiu_package_json_uiu_package_devdependencies",
+      "_tgt": "uiu_package_devdependencies_eslint",
+      "source": "uiu_package_json_uiu_package_devdependencies",
+      "target": "uiu_package_devdependencies_eslint"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_src": "uiu_package_json_uiu_package_devdependencies",
+      "_tgt": "uiu_package_devdependencies_eslint_config_next",
+      "source": "uiu_package_json_uiu_package_devdependencies",
+      "target": "uiu_package_devdependencies_eslint_config_next"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/package.json",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_src": "uiu_package_json_uiu_package_devdependencies",
+      "_tgt": "uiu_package_devdependencies_eslint_eslintrc",
+      "source": "uiu_package_json_uiu_package_devdependencies",
+      "target": "uiu_package_devdependencies_eslint_eslintrc"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/postcss.config.mjs",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_src": "uiu_postcss_config_mjs",
+      "_tgt": "uiu_postcss_config_config",
+      "source": "uiu_postcss_config_mjs",
+      "target": "uiu_postcss_config_config"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_src": "uiu_tsconfig_json",
+      "_tgt": "uiu_tsconfig_compileroptions",
+      "source": "uiu_tsconfig_json",
+      "target": "uiu_tsconfig_compileroptions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_src": "uiu_tsconfig_json",
+      "_tgt": "uiu_tsconfig_include",
+      "source": "uiu_tsconfig_json",
+      "target": "uiu_tsconfig_include"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_src": "uiu_tsconfig_json",
+      "_tgt": "uiu_tsconfig_exclude",
+      "source": "uiu_tsconfig_json",
+      "target": "uiu_tsconfig_exclude"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "uiu_tsconfig_compileroptions",
+      "_tgt": "uiu_tsconfig_compileroptions_target",
+      "source": "uiu_tsconfig_compileroptions",
+      "target": "uiu_tsconfig_compileroptions_target"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_src": "uiu_tsconfig_compileroptions",
+      "_tgt": "uiu_tsconfig_compileroptions_lib",
+      "source": "uiu_tsconfig_compileroptions",
+      "target": "uiu_tsconfig_compileroptions_lib"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "uiu_tsconfig_compileroptions",
+      "_tgt": "uiu_tsconfig_compileroptions_allowjs",
+      "source": "uiu_tsconfig_compileroptions",
+      "target": "uiu_tsconfig_compileroptions_allowjs"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_src": "uiu_tsconfig_compileroptions",
+      "_tgt": "uiu_tsconfig_compileroptions_skiplibcheck",
+      "source": "uiu_tsconfig_compileroptions",
+      "target": "uiu_tsconfig_compileroptions_skiplibcheck"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_src": "uiu_tsconfig_compileroptions",
+      "_tgt": "uiu_tsconfig_compileroptions_strict",
+      "source": "uiu_tsconfig_compileroptions",
+      "target": "uiu_tsconfig_compileroptions_strict"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_src": "uiu_tsconfig_compileroptions",
+      "_tgt": "uiu_tsconfig_compileroptions_noemit",
+      "source": "uiu_tsconfig_compileroptions",
+      "target": "uiu_tsconfig_compileroptions_noemit"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_src": "uiu_tsconfig_compileroptions",
+      "_tgt": "uiu_tsconfig_compileroptions_esmoduleinterop",
+      "source": "uiu_tsconfig_compileroptions",
+      "target": "uiu_tsconfig_compileroptions_esmoduleinterop"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_src": "uiu_tsconfig_compileroptions",
+      "_tgt": "uiu_tsconfig_compileroptions_module",
+      "source": "uiu_tsconfig_compileroptions",
+      "target": "uiu_tsconfig_compileroptions_module"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_src": "uiu_tsconfig_compileroptions",
+      "_tgt": "uiu_tsconfig_compileroptions_moduleresolution",
+      "source": "uiu_tsconfig_compileroptions",
+      "target": "uiu_tsconfig_compileroptions_moduleresolution"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_src": "uiu_tsconfig_compileroptions",
+      "_tgt": "uiu_tsconfig_compileroptions_resolvejsonmodule",
+      "source": "uiu_tsconfig_compileroptions",
+      "target": "uiu_tsconfig_compileroptions_resolvejsonmodule"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_src": "uiu_tsconfig_compileroptions",
+      "_tgt": "uiu_tsconfig_compileroptions_isolatedmodules",
+      "source": "uiu_tsconfig_compileroptions",
+      "target": "uiu_tsconfig_compileroptions_isolatedmodules"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_src": "uiu_tsconfig_compileroptions",
+      "_tgt": "uiu_tsconfig_compileroptions_jsx",
+      "source": "uiu_tsconfig_compileroptions",
+      "target": "uiu_tsconfig_compileroptions_jsx"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_src": "uiu_tsconfig_compileroptions",
+      "_tgt": "uiu_tsconfig_compileroptions_incremental",
+      "source": "uiu_tsconfig_compileroptions",
+      "target": "uiu_tsconfig_compileroptions_incremental"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_src": "uiu_tsconfig_compileroptions",
+      "_tgt": "uiu_tsconfig_compileroptions_plugins",
+      "source": "uiu_tsconfig_compileroptions",
+      "target": "uiu_tsconfig_compileroptions_plugins"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_src": "uiu_tsconfig_compileroptions",
+      "_tgt": "uiu_tsconfig_compileroptions_paths",
+      "source": "uiu_tsconfig_compileroptions",
+      "target": "uiu_tsconfig_compileroptions_paths"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/tsconfig.json",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_src": "uiu_tsconfig_compileroptions_paths",
+      "_tgt": "uiu_tsconfig_paths",
+      "source": "uiu_tsconfig_compileroptions_paths",
+      "target": "uiu_tsconfig_paths"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/src/app/layout.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "uiu_src_app_layout_tsx",
+      "_tgt": "app_layout_geistsans",
+      "source": "uiu_src_app_layout_tsx",
+      "target": "app_layout_geistsans"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/src/app/layout.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_src": "uiu_src_app_layout_tsx",
+      "_tgt": "app_layout_geistmono",
+      "source": "uiu_src_app_layout_tsx",
+      "target": "app_layout_geistmono"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/src/app/layout.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_src": "uiu_src_app_layout_tsx",
+      "_tgt": "app_layout_metadata",
+      "source": "uiu_src_app_layout_tsx",
+      "target": "app_layout_metadata"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/src/app/layout.tsx",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_src": "uiu_src_app_layout_tsx",
+      "_tgt": "app_layout_rootlayout",
+      "source": "uiu_src_app_layout_tsx",
+      "target": "app_layout_rootlayout"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "uiu/src/app/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "uiu_src_app_page_tsx",
+      "_tgt": "app_page_home",
+      "source": "uiu_src_app_page_tsx",
+      "target": "app_page_home"
+    }
+  ]
+}

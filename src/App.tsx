@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Facebook, PlusCircle, Trash2, Calculator, GraduationCap, Code2, RefreshCw, X, Sun, Moon, Banknote, Target, RotateCcw } from 'lucide-react';
+import AdminInstallments from './components/AdminInstallments'
+import supabase from './lib/supabase'
 // Confetti removed to improve performance
 
 interface Course {
@@ -31,8 +33,22 @@ const creditOptions = [1, 2, 3, 4, 5, 6];
 
 // Initialize dark theme immediately
 if (typeof document !== 'undefined') {
-  document.documentElement.classList.add('dark');
+  const savedTheme = localStorage.getItem('theme');
+  document.documentElement.classList.toggle('dark', savedTheme !== 'light');
 }
+
+const parseStoredArray = <T,>(key: string): T[] => {
+  const saved = localStorage.getItem(key);
+  if (!saved) return [];
+
+  try {
+    const parsed = JSON.parse(saved);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    localStorage.removeItem(key);
+    return [];
+  }
+};
 
 function App() {
   const [completedCredit, setCompletedCredit] = useState<number | undefined>(() => {
@@ -43,17 +59,13 @@ function App() {
     const saved = localStorage.getItem('currentCGPA');
     return saved ? Number(saved) : undefined;
   });
-  const [courses, setCourses] = useState<any[]>(() => {
-    const saved = localStorage.getItem('courses');
-    return saved ? JSON.parse(saved) : [];
-  });
-  const [retakes, setRetakes] = useState<any[]>(() => {
-    const saved = localStorage.getItem('retakes');
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [courses, setCourses] = useState<Course[]>(() => parseStoredArray<Course>('courses'));
+  const [retakes, setRetakes] = useState<Retake[]>(() => parseStoredArray<Retake>('retakes'));
   const [showResults, setShowResults] = useState(false);
   const [isModalClosing, setIsModalClosing] = useState(false);
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => (
+    localStorage.getItem('theme') === 'light' ? 'light' : 'dark'
+  ));
   // Confetti state removed
   const [tuitionTotal, setTuitionTotal] = useState<number | undefined>(() => {
     const saved = localStorage.getItem('tuitionTotal');
@@ -82,6 +94,7 @@ function App() {
     const saved = localStorage.getItem('targetCredits');
     return saved ? Number(saved) : undefined;
   });
+  const [installmentDates, setInstallmentDates] = useState({ first: '', second: '', third: '' });
 
   // Persist state changes
   useEffect(() => {
@@ -131,10 +144,39 @@ function App() {
     else localStorage.removeItem('targetCredits');
   }, [targetCredits]);
 
-  // Force dark theme on mount
   useEffect(() => {
-    document.documentElement.classList.add('dark');
-    localStorage.setItem('theme', 'dark');
+    let mounted = true;
+
+    const loadInstallmentDates = async () => {
+      const { data } = await supabase
+        .from('settings')
+        .select('value')
+        .eq('key', 'installment_dates')
+        .single();
+
+      if (!mounted) return;
+
+      if (data?.value) {
+        try {
+          const parsed = JSON.parse(data.value);
+          setInstallmentDates({
+            first: typeof parsed.first === 'string' ? parsed.first : '',
+            second: typeof parsed.second === 'string' ? parsed.second : '',
+            third: typeof parsed.third === 'string' ? parsed.third : '',
+          });
+        } catch {
+          setInstallmentDates({ first: '', second: '', third: '' });
+        }
+      }
+    };
+
+    loadInstallmentDates();
+    const refreshId = setInterval(loadInstallmentDates, 60_000);
+
+    return () => {
+      mounted = false;
+      clearInterval(refreshId);
+    };
   }, []);
 
   useEffect(() => {
@@ -163,7 +205,7 @@ function App() {
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
     setTheme(newTheme);
-    document.documentElement.classList.toggle('dark');
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
     localStorage.setItem('theme', newTheme);
   };
 
@@ -213,13 +255,13 @@ function App() {
     if (courses.length === 0 && retakes.length === 0) return 0;
     let totalPoints = 0;
     let totalCredits = 0;
-    courses.forEach((course: any) => {
+    courses.forEach((course) => {
       if (course.credit && course.grade && gradePoints[course.grade] !== undefined) {
         totalPoints += Number(course.credit) * gradePoints[course.grade];
         totalCredits += Number(course.credit);
       }
     });
-    retakes.forEach((retake: any) => {
+    retakes.forEach((retake) => {
       if (retake.credit && retake.newGrade && gradePoints[retake.newGrade] !== undefined) {
         totalPoints += Number(retake.credit) * gradePoints[retake.newGrade];
         totalCredits += Number(retake.credit);
@@ -234,13 +276,13 @@ function App() {
     const defaultCurrentCGPA: number = (currentCGPA as number) ?? 0;
     let adjustedPoints = defaultCurrentCGPA * defaultCompletedCredit;
     let totalCredits = defaultCompletedCredit;
-    courses.forEach((course: any) => {
+    courses.forEach((course) => {
       if (course.credit && course.grade && gradePoints[course.grade] !== undefined) {
         adjustedPoints += Number(course.credit) * gradePoints[course.grade];
         totalCredits += Number(course.credit);
       }
     });
-    retakes.forEach((retake: any) => {
+    retakes.forEach((retake) => {
       if (retake.credit && retake.newGrade && retake.oldGrade &&
           gradePoints[retake.newGrade] !== undefined &&
           gradePoints[retake.oldGrade] !== undefined) {
@@ -254,7 +296,7 @@ function App() {
 
   const calculateCurrentTrimesterCredits = () => {
     let totalCredits = 0;
-    courses.forEach((course: any) => {
+    courses.forEach((course) => {
       if (course.credit) totalCredits += Number(course.credit);
     });
     return totalCredits;
@@ -262,7 +304,7 @@ function App() {
 
   const calculateTotalCredits = () => {
     const defaultCompletedCredit: number = (completedCredit as number) ?? 0;
-    return defaultCompletedCredit + courses.reduce((sum: number, course: any) =>
+    return defaultCompletedCredit + courses.reduce((sum, course) =>
       sum + (course.credit ? Number(course.credit) : 0), 0);
   };
 
@@ -278,6 +320,7 @@ function App() {
       setTrimesterFee(6500);
       setTargetCGPA(undefined);
       setTargetCredits(undefined);
+      setInstallmentDates({ first: '', second: '', third: '' });
       localStorage.clear();
       // Restore theme preference
       localStorage.setItem('theme', theme);
@@ -285,12 +328,17 @@ function App() {
   };
 
   const handleCalculateClick = () => {
-    const newCGPA = calculateCGPA();
     setShowResults(true);
   };
 
   const calculateTargetGPA = () => {
-    if (!currentCGPA || !completedCredit || !targetCGPA || !targetCredits) return null;
+    if (
+      currentCGPA === undefined ||
+      completedCredit === undefined ||
+      targetCGPA === undefined ||
+      targetCredits === undefined ||
+      targetCredits <= 0
+    ) return null;
     
     const currentPoints = currentCGPA * completedCredit;
     const totalCredits = completedCredit + targetCredits;
@@ -303,11 +351,18 @@ function App() {
 
   // Tuition helpers
   const formatAmount = (n: number) => n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  const formatPercent = (p?: number) => (p ? `${p}%` : 'None');
   const weekdayOf = (dateText: string) => {
     const d = new Date(dateText);
     if (isNaN(d.getTime())) return '';
     return d.toLocaleDateString(undefined, { weekday: 'long' });
+  };
+  const formatDate = (dateText: string) => {
+    const d = new Date(dateText);
+    if (isNaN(d.getTime())) return '';
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const year = d.getFullYear();
+    return `${day}/${month}/${year}`;
   };
 
   const discountedTuition = (() => {
@@ -336,12 +391,11 @@ function App() {
     return { first, second, third, total: +total.toFixed(2) };
   })();
 
-  // Installment due dates (static display)
-  const installmentDates = {
-    first: 'Apr 12, 2026',
-    second: 'May 12, 2026',
-    third: 'June 14, 2026',
-  } as const;
+  const isAdminRoute = typeof window !== 'undefined' && window.location.pathname === '/admin';
+
+  if (isAdminRoute) {
+    return <AdminInstallments />;
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-black text-gray-900 dark:text-white p-3 sm:p-6 transition-colors duration-300 safe-px safe-pt safe-pb">
@@ -430,7 +484,7 @@ function App() {
                 <input
                   type="number"
                   min="0"
-                  value={completedCredit || ''}
+                  value={completedCredit ?? ''}
                   onChange={(e) => setCompletedCredit(e.target.value ? Number(e.target.value) : undefined)}
                   placeholder="Enter completed credits"
                   className="w-full bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white p-2 rounded border border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500 placeholder-gray-500 text-sm sm:text-base transition-colors duration-300"
@@ -443,7 +497,7 @@ function App() {
                   min="0"
                   step="0.01"
                   max="4.00"
-                  value={currentCGPA || ''}
+                  value={currentCGPA ?? ''}
                   onChange={(e) => setCurrentCGPA(e.target.value ? Number(e.target.value) : undefined)}
                   placeholder="Enter current CGPA"
                   className="w-full bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white p-2 rounded border border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500 placeholder-gray-500 text-sm sm:text-base transition-colors duration-300"
@@ -599,7 +653,7 @@ function App() {
                   min="0"
                   step="0.01"
                   max="4.00"
-                  value={currentCGPA || ''}
+                  value={currentCGPA ?? ''}
                   onChange={(e) => setCurrentCGPA(e.target.value ? Number(e.target.value) : undefined)}
                   placeholder="e.g., 3.50"
                   className="w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-2 rounded border border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder-gray-500 text-sm sm:text-base transition-colors duration-300"
@@ -610,7 +664,7 @@ function App() {
                 <input
                   type="number"
                   min="0"
-                  value={completedCredit || ''}
+                  value={completedCredit ?? ''}
                   onChange={(e) => setCompletedCredit(e.target.value ? Number(e.target.value) : undefined)}
                   placeholder="e.g., 60"
                   className="w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-2 rounded border border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder-gray-500 text-sm sm:text-base transition-colors duration-300"
@@ -623,7 +677,7 @@ function App() {
                   min="0"
                   step="0.01"
                   max="4.00"
-                  value={targetCGPA || ''}
+                  value={targetCGPA ?? ''}
                   onChange={(e) => setTargetCGPA(e.target.value ? Number(e.target.value) : undefined)}
                   placeholder="e.g., 3.60"
                   className="w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-2 rounded border border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder-gray-500 text-sm sm:text-base transition-colors duration-300"
@@ -634,7 +688,7 @@ function App() {
                 <input
                   type="number"
                   min="0"
-                  value={targetCredits || ''}
+                  value={targetCredits ?? ''}
                   onChange={(e) => setTargetCredits(e.target.value ? Number(e.target.value) : undefined)}
                   placeholder="e.g., 12"
                   className="w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-2 rounded border border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder-gray-500 text-sm sm:text-base transition-colors duration-300"
@@ -774,41 +828,47 @@ function App() {
                   <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg">
                     <p className="text-sm text-gray-600 dark:text-gray-300">First Payment (40%)</p>
                     <p className="text-2xl font-bold text-green-600">{formatAmount(tuitionBreakdown.first)}</p>
+                    {installmentDates.first && (
                     <p className="mt-2">
                       <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-200 border border-yellow-200/80 dark:border-yellow-700/50 text-xs">
                         <span className="opacity-80">Last Date:</span>
                         <span className="font-semibold">
-                          {installmentDates.first}
+                          {formatDate(installmentDates.first)}
                           {weekdayOf(installmentDates.first) ? ` (${weekdayOf(installmentDates.first)})` : ''}
                         </span>
                       </span>
                     </p>
+                    )}
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg">
                     <p className="text-sm text-gray-600 dark:text-gray-300">Second Payment (30%)</p>
                     <p className="text-2xl font-bold text-green-600">{formatAmount(tuitionBreakdown.second)}</p>
+                    {installmentDates.second && (
                     <p className="mt-2">
                       <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-200 border border-yellow-200/80 dark:border-yellow-700/50 text-xs">
                         <span className="opacity-80">Last Date:</span>
                         <span className="font-semibold">
-                          {installmentDates.second}
+                          {formatDate(installmentDates.second)}
                           {weekdayOf(installmentDates.second) ? ` (${weekdayOf(installmentDates.second)})` : ''}
                         </span>
                       </span>
                     </p>
+                    )}
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg">
                     <p className="text-sm text-gray-600 dark:text-gray-300">Third Payment (30%)</p>
                     <p className="text-2xl font-bold text-green-600">{formatAmount(tuitionBreakdown.third)}</p>
+                    {installmentDates.third && (
                     <p className="mt-2">
                       <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-200 border border-yellow-200/80 dark:border-yellow-700/50 text-xs">
                         <span className="opacity-80">Last Date:</span>
                         <span className="font-semibold">
-                          {installmentDates.third}
+                          {formatDate(installmentDates.third)}
                           {weekdayOf(installmentDates.third) ? ` (${weekdayOf(installmentDates.third)})` : ''}
                         </span>
                       </span>
                     </p>
+                    )}
                   </div>
                   <div className="bg-gray-100 dark:bg-gray-800/80 p-3 rounded-lg">
                     <p className="text-sm text-gray-600 dark:text-gray-300">Total</p>

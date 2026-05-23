@@ -1,0 +1,52 @@
+{
+  "files": {
+    "code": [
+      "D:\\uiu\\App.tsx",
+      "D:\\uiu\\fix-button.ps1",
+      "D:\\uiu\\package.json",
+      "D:\\uiu\\postcss.config.js",
+      "D:\\uiu\\tailwind.config.js",
+      "D:\\uiu\\vite.config.js",
+      "D:\\uiu\\.bolt\\config.json",
+      "D:\\uiu\\.puku\\config.json",
+      "D:\\uiu\\src\\App.jsx",
+      "D:\\uiu\\src\\App.tsx",
+      "D:\\uiu\\src\\main.jsx",
+      "D:\\uiu\\src\\main.tsx",
+      "D:\\uiu\\src\\vite-env.d.ts",
+      "D:\\uiu\\uiu\\eslint.config.mjs",
+      "D:\\uiu\\uiu\\next-env.d.ts",
+      "D:\\uiu\\uiu\\next.config.ts",
+      "D:\\uiu\\uiu\\package.json",
+      "D:\\uiu\\uiu\\postcss.config.mjs",
+      "D:\\uiu\\uiu\\tailwind.config.ts",
+      "D:\\uiu\\uiu\\tsconfig.json",
+      "D:\\uiu\\uiu\\src\\app\\layout.tsx",
+      "D:\\uiu\\uiu\\src\\app\\page.tsx"
+    ],
+    "document": [
+      "D:\\uiu\\index.html",
+      "D:\\uiu\\README.md",
+      "D:\\uiu\\readme.txt",
+      "D:\\uiu\\.github\\copilot-instructions.md",
+      "D:\\uiu\\uiu\\README.md"
+    ],
+    "paper": [],
+    "image": [
+      "D:\\uiu\\public\\favicon.svg",
+      "D:\\uiu\\uiu\\public\\file.svg",
+      "D:\\uiu\\uiu\\public\\globe.svg",
+      "D:\\uiu\\uiu\\public\\next.svg",
+      "D:\\uiu\\uiu\\public\\vercel.svg",
+      "D:\\uiu\\uiu\\public\\window.svg"
+    ],
+    "video": []
+  },
+  "total_files": 33,
+  "total_words": 6328,
+  "needs_graph": false,
+  "warning": "Corpus is ~6,328 words - fits in a single context window. You may not need a graph.",
+  "skipped_sensitive": [],
+  "graphifyignore_patterns": 20,
+  "scan_root": "D:\\uiu"
+}
