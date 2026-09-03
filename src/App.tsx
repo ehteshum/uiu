@@ -85,6 +85,16 @@ function App() {
     return saved ? Number(saved) : 6500;
   });
 
+  // FYDP (Final Year Design Project) - no waiver/scholarship, per-credit cost
+  const [fydpCredits, setFydpCredits] = useState<number>(() => {
+    const saved = localStorage.getItem('fydpCredits');
+    return saved ? Number(saved) : 2; // Default 2 credits (1 FYDP course)
+  });
+  const [fydpPerCreditCost, setFydpPerCreditCost] = useState<number>(() => {
+    const saved = localStorage.getItem('fydpPerCreditCost');
+    return saved ? Number(saved) : 5525;
+  });
+
   // Target CGPA states
   const [targetCGPA, setTargetCGPA] = useState<number | undefined>(() => {
     const saved = localStorage.getItem('targetCGPA');
@@ -173,6 +183,14 @@ function App() {
   useEffect(() => {
     localStorage.setItem('trimesterFee', String(trimesterFee));
   }, [trimesterFee]);
+
+  useEffect(() => {
+    localStorage.setItem('fydpCredits', String(fydpCredits));
+  }, [fydpCredits]);
+
+  useEffect(() => {
+    localStorage.setItem('fydpPerCreditCost', String(fydpPerCreditCost));
+  }, [fydpPerCreditCost]);
 
   useEffect(() => {
     if (targetCGPA !== undefined) localStorage.setItem('targetCGPA', String(targetCGPA));
@@ -358,6 +376,8 @@ function App() {
       setWaiverPct(undefined);
       setScholarshipPct(undefined);
       setTrimesterFee(6500);
+      setFydpCredits(2);
+      setFydpPerCreditCost(5525);
       setTargetCGPA(undefined);
       setTargetCredits(undefined);
       setInstallmentDates({ first: '', second: '', third: '' });
@@ -405,6 +425,9 @@ function App() {
     return `${day}/${month}/${year}`;
   };
 
+  // FYDP tuition (no waiver/scholarship applied)
+  const fydpTuition = fydpCredits * fydpPerCreditCost;
+
   const discountedTuition = (() => {
     const main = tuitionTotal ?? 0;
     const term = trimesterFee ?? 0;
@@ -422,9 +445,12 @@ function App() {
     return { amount: finalTotal, steps, baseNet, amountNet, main, term };
   })();
 
+  // Total tuition = Regular (with discounts) + FYDP (no discounts)
+  const totalTuitionPayable = discountedTuition.amount + fydpTuition;
+
   const tuitionBreakdown = (() => {
-    if (!tuitionTotal || tuitionTotal <= 0) return null;
-    const total = discountedTuition.amount || 0; // final payable after discounts + trimester fee added back
+    if (totalTuitionPayable <= 0) return null;
+    const total = totalTuitionPayable;
     const first = +(total * 0.4).toFixed(2);
     const second = +(total * 0.3).toFixed(2);
     const third = +(total - first - second).toFixed(2);
@@ -825,6 +851,46 @@ function App() {
                 <p className="text-xs text-gray-500 mt-1">Default is 6500. Change it if needed.</p>
               </div>
 
+              {/* FYDP (Final Year Design Project) - No waiver/scholarship */}
+              <div className="col-span-1 sm:col-span-2 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 p-3 rounded-lg">
+                <div className="flex items-center gap-2 mb-3">
+                  <svg className="w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                  <span className="font-semibold text-amber-800 dark:text-amber-200">FYDP (Final Year Design Project)</span>
+                </div>
+                <p className="text-xs text-amber-700 dark:text-amber-300 mb-3">No waiver/scholarship applies to FYDP credits. Each FYDP course = 2 credits.</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block mb-2 text-sm sm:text-base">FYDP Credits</label>
+                    <input
+                      type="number"
+                      min="0"
+                      step="2"
+                      value={fydpCredits}
+                      onChange={(e) => setFydpCredits(e.target.value ? Number(e.target.value) : 0)}
+                      placeholder="2 (1 course), 4 (2 courses), etc."
+                      className="w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-2 rounded border border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500 placeholder-gray-500 text-sm sm:text-base transition-colors duration-300"
+                    />
+                  </div>
+                  <div>
+                    <label className="block mb-2 text-sm sm:text-base">Cost per Credit (৳)</label>
+                    <input
+                      type="number"
+                      min="0"
+                      step="1"
+                      value={fydpPerCreditCost}
+                      onChange={(e) => setFydpPerCreditCost(e.target.value ? Number(e.target.value) : 5525)}
+                      placeholder="5525"
+                      className="w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-2 rounded border border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500 placeholder-gray-500 text-sm sm:text-base transition-colors duration-300"
+                    />
+                  </div>
+                </div>
+                <div className="mt-3 p-2 bg-amber-100 dark:bg-amber-900/40 rounded text-sm font-medium text-amber-800 dark:text-amber-200">
+                  FYDP Tuition: <span className="font-bold">{formatAmount(fydpTuition)}</span> ({fydpCredits} credits × ৳{formatAmount(fydpPerCreditCost)})
+                </div>
+              </div>
+
               {/* Waiver selection */}
               <div className="col-span-1">
                 <label className="block mb-2 text-sm sm:text-base">Waiver</label>
@@ -877,16 +943,27 @@ function App() {
                         {discountedTuition.steps.map((s, idx) => (
                           <div key={idx}>After {s.pct}%: <span className="font-semibold">{formatAmount(s.after)}</span></div>
                         ))}
-                        <div>Final Payable: <span className="font-semibold text-green-600">{formatAmount(discountedTuition.amount)}</span></div>
+                        <div>Regular Final Payable: <span className="font-semibold text-green-600">{formatAmount(discountedTuition.amount)}</span></div>
                         <div>You save: <span className="font-semibold text-orange-500">{formatAmount(+((discountedTuition.main - discountedTuition.amount).toFixed(2)))}</span></div>
                       </>
                     ) : (
-                      <div>Final Payable: <span className="font-semibold">{formatAmount(discountedTuition.amount)}</span></div>
+                      <div>Regular Final Payable: <span className="font-semibold">{formatAmount(discountedTuition.amount)}</span></div>
                     )}
                   </div>
                 </div>
               )}
 
+              {/* FYDP Summary */}
+              {fydpCredits > 0 && (
+                <div className="col-span-1 sm:col-span-2 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 p-3 rounded-lg">
+                  <div className="text-sm text-amber-700 dark:text-amber-300 flex flex-col gap-1">
+                    <div>FYDP Tuition (no discounts): <span className="font-semibold">{formatAmount(fydpTuition)}</span></div>
+                    <div className="text-xs opacity-80">({fydpCredits} credits × ৳{formatAmount(fydpPerCreditCost)})</div>
+                  </div>
+                </div>
+              )}
+
+              {/* Combined Total */}
               {tuitionBreakdown && (
                 <>
                   <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg">
@@ -934,9 +1011,16 @@ function App() {
                     </p>
                     )}
                   </div>
-                  <div className="bg-gray-100 dark:bg-gray-800/80 p-3 rounded-lg">
+                  <div className="bg-gray-100 dark:bg-gray-800/80 p-3 rounded-lg border-t-2 border-orange-500">
+                    <div className="flex flex-col gap-1 mb-2">
+                      <div className="text-sm text-gray-600 dark:text-gray-300">Regular (with discounts)</div>
+                      <div className="text-sm text-amber-700 dark:text-amber-300">FYDP (no discounts)</div>
+                    </div>
                     <p className="text-sm text-gray-600 dark:text-gray-300">Total</p>
                     <p className="text-2xl font-bold text-green-600">{formatAmount(tuitionBreakdown.total)}</p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      Regular: {formatAmount(discountedTuition.amount)} + FYDP: {formatAmount(fydpTuition)}
+                    </p>
                   </div>
                 </>
               )}
