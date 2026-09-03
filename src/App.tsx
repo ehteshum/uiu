@@ -95,12 +95,52 @@ function App() {
     return saved ? Number(saved) : undefined;
   });
   const [installmentDates, setInstallmentDates] = useState({ first: '', second: '', third: '' });
+  const [countdown, setCountdown] = useState<{ days: number; label: string; date: string } | null>(null);
 
   // Persist state changes
   useEffect(() => {
     if (completedCredit !== undefined) localStorage.setItem('completedCredit', String(completedCredit));
     else localStorage.removeItem('completedCredit');
   }, [completedCredit]);
+
+  // Countdown calculation - runs every minute and on date changes
+  useEffect(() => {
+    const calculateCountdown = () => {
+      const now = new Date();
+      const dates = [
+        { label: '1st Installment', date: installmentDates.first },
+        { label: '2nd Installment', date: installmentDates.second },
+        { label: '3rd Installment', date: installmentDates.third },
+      ];
+
+      let next: { days: number; label: string; date: string } | null = null;
+
+      for (const d of dates) {
+        if (!d.date) continue;
+        const deadline = new Date(d.date);
+        if (isNaN(deadline.getTime())) continue;
+        
+        // Set to end of day for deadline
+        deadline.setHours(23, 59, 59, 999);
+        
+        const diffMs = deadline.getTime() - now.getTime();
+        const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+        
+        if (diffDays >= 0) {
+          // This deadline hasn't passed yet
+          if (!next || diffDays < next.days) {
+            next = { days: diffDays, label: d.label, date: d.date };
+          }
+        }
+      }
+
+      setCountdown(next);
+    };
+
+    calculateCountdown();
+    const interval = setInterval(calculateCountdown, 60_000); // Update every minute
+    return () => clearInterval(interval);
+  }, [installmentDates]);
 
   useEffect(() => {
     if (currentCGPA !== undefined) localStorage.setItem('currentCGPA', String(currentCGPA));
@@ -435,6 +475,30 @@ function App() {
             <Facebook size={24} />
           </a>
         </div>
+
+        {/* Deadline Countdown Banner */}
+        {countdown && (
+          <div className={`mb-4 sm:mb-6 p-3 sm:p-4 rounded-lg border-l-4 transition-all duration-300 animate-pulse-subtle
+            ${countdown.days <= 2 
+              ? 'bg-red-50 dark:bg-red-900/20 border-red-500 text-red-700 dark:text-red-300' 
+              : countdown.days <= 7 
+                ? 'bg-orange-50 dark:bg-orange-900/20 border-orange-500 text-orange-700 dark:text-orange-300' 
+                : 'bg-green-50 dark:bg-green-900/20 border-green-500 text-green-700 dark:text-green-300'
+            }`}>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span className="font-semibold text-sm sm:text-base">
+                {countdown.label} Due: {countdown.days === 0 ? 'Today' : countdown.days === 1 ? 'Tomorrow' : `in ${countdown.days} days`}
+              </span>
+            </div>
+            <div className="text-xs sm:text-sm opacity-80">
+              {new Date(countdown.date).toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
+            </div>
+          </div>
+        </div>)}
 
         {/* Tabs */}
         <div className="mb-4 sm:mb-6 grid grid-cols-3 gap-2">

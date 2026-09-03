@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import supabase from '../lib/supabase'
+import supabase, { friendlySupabaseError, isSupabaseConfigured } from '../lib/supabase'
 
 const toDateInputValue = (value?: string | null) => {
   if (!value) return ''
@@ -26,23 +26,33 @@ export default function AdminInstallments() {
     let mounted = true
     async function load() {
       setLoading(true)
-      const { data, error } = await supabase
-        .from('settings')
-        .select('value')
-        .eq('key', 'installment_dates')
-        .single()
-      if (!mounted) return
-      if (!error && data?.value) {
-        try {
-          const parsed = JSON.parse(data.value)
-          setFirst(toDateInputValue(parsed.first))
-          setSecond(toDateInputValue(parsed.second))
-          setThird(toDateInputValue(parsed.third))
-        } catch {
-          // ignore
+      try {
+        const { data, error } = await supabase
+          .from('settings')
+          .select('value')
+          .eq('key', 'installment_dates')
+          .single()
+        if (!mounted) return
+        if (error) {
+          // Don't block login UI on this, but surface config/network issues in console.
+          console.error('[admin] Failed to load installment dates:', friendlySupabaseError(error))
+          return
         }
+        if (data?.value) {
+          try {
+            const parsed = JSON.parse(data.value)
+            setFirst(toDateInputValue(parsed.first))
+            setSecond(toDateInputValue(parsed.second))
+            setThird(toDateInputValue(parsed.third))
+          } catch {
+            // ignore
+          }
+        }
+      } catch (err) {
+        console.error('[admin] Failed to load installment dates:', friendlySupabaseError(err))
+      } finally {
+        if (mounted) setLoading(false)
       }
-      setLoading(false)
     }
     load()
     return () => { mounted = false }
@@ -55,37 +65,50 @@ export default function AdminInstallments() {
   async function login() {
     setAuthLoading(true)
     setMsg(null)
-    const { data, error } = await supabase.rpc('verify_admin_login', {
-      p_email: email,
-      p_password: password,
-    })
-
-    if (error) {
-      setMsg(error.message)
+    if (!isSupabaseConfigured) {
+      setMsg('Database is not configured (missing VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY).')
       setAuthLoading(false)
       return
     }
+    try {
+      const { data, error } = await supabase.rpc('verify_admin_login', {
+        p_email: email,
+        p_password: password,
+      })
 
-    if (!data) {
-      setMsg('Invalid email or password')
+      if (error) {
+        setMsg(friendlySupabaseError(error))
+        return
+      }
+
+      if (!data) {
+        setMsg('Invalid email or password')
+        return
+      }
+
+      setIsAuthed(true)
+      setPassword('')
+      setMsg('Logged in')
+    } catch (err) {
+      setMsg(friendlySupabaseError(err))
+    } finally {
       setAuthLoading(false)
-      return
     }
-
-    setIsAuthed(true)
-    setPassword('')
-    setMsg('Logged in')
-    setAuthLoading(false)
   }
 
   async function save() {
     setSaving(true)
     setMsg(null)
-    const payload = { first: first || null, second: second || null, third: third || null }
-    const { error } = await supabase.from('settings').upsert({ key: 'installment_dates', value: JSON.stringify(payload), updated_at: new Date().toISOString() })
-    if (error) setMsg(error.message)
-    else setMsg('Saved')
-    setSaving(false)
+    try {
+      const payload = { first: first || null, second: second || null, third: third || null }
+      const { error } = await supabase.from('settings').upsert({ key: 'installment_dates', value: JSON.stringify(payload), updated_at: new Date().toISOString() })
+      if (error) setMsg(friendlySupabaseError(error))
+      else setMsg('Saved')
+    } catch (err) {
+      setMsg(friendlySupabaseError(err))
+    } finally {
+      setSaving(false)
+    }
   }
 
   return (
