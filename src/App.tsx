@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Facebook, PlusCircle, Trash2, Calculator, GraduationCap, Code2, RefreshCw, X, Sun, Moon, Banknote, Target, RotateCcw } from 'lucide-react';
 import AdminInstallments from './components/AdminInstallments'
 import supabase from './lib/supabase'
+import { daysUntilInDhaka, formatDateInDhaka, formatLongDateInDhaka, weekdayInDhaka } from './lib/dhakaTime'
 // Confetti removed to improve performance
 
 interface Course {
@@ -113,7 +114,8 @@ function App() {
     else localStorage.removeItem('completedCredit');
   }, [completedCredit]);
 
-  // Countdown calculation - runs every minute and on date changes
+  // Countdown calculation - runs every minute and on date changes.
+  // Uses Asia/Dhaka so the deadline day is the same for every viewer.
   useEffect(() => {
     const calculateCountdown = () => {
       const now = new Date();
@@ -127,17 +129,11 @@ function App() {
 
       for (const d of dates) {
         if (!d.date) continue;
-        const deadline = new Date(d.date);
-        if (isNaN(deadline.getTime())) continue;
-        
-        // Set to end of day for deadline
-        deadline.setHours(23, 59, 59, 999);
-        
-        const diffMs = deadline.getTime() - now.getTime();
-        const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
-        
+        const diffDays = daysUntilInDhaka(d.date, now);
+        if (diffDays === null) continue;
+
         if (diffDays >= 0) {
-          // This deadline hasn't passed yet
+          // This deadline hasn't passed yet (deadline day counts as 0 -> "Today")
           if (!next || diffDays < next.days) {
             next = { days: diffDays, label: d.label, date: d.date };
           }
@@ -411,19 +407,8 @@ function App() {
 
   // Tuition helpers
   const formatAmount = (n: number) => n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  const weekdayOf = (dateText: string) => {
-    const d = new Date(dateText);
-    if (isNaN(d.getTime())) return '';
-    return d.toLocaleDateString(undefined, { weekday: 'long' });
-  };
-  const formatDate = (dateText: string) => {
-    const d = new Date(dateText);
-    if (isNaN(d.getTime())) return '';
-    const day = String(d.getDate()).padStart(2, '0');
-    const month = String(d.getMonth() + 1).padStart(2, '0');
-    const year = d.getFullYear();
-    return `${day}/${month}/${year}`;
-  };
+  const weekdayOf = (dateText: string) => weekdayInDhaka(dateText);
+  const formatDate = (dateText: string) => formatDateInDhaka(dateText);
 
   // FYDP tuition (no waiver/scholarship applied)
   const fydpTuition = fydpCredits * fydpPerCreditCost;
@@ -521,7 +506,7 @@ function App() {
               </span>
             </div>
             <div className="text-xs sm:text-sm opacity-80">
-              {new Date(countdown.date).toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
+              {formatLongDateInDhaka(countdown.date)}
             </div>
           </div>
         </div>)}
