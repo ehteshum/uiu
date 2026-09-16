@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import supabase from '../lib/supabase'
+import { formatDateTimeInDhaka } from '../lib/dhakaTime'
 
 export default function DeadlineDisplay() {
   const [deadline, setDeadline] = useState<string | null>(null)
@@ -32,7 +33,7 @@ export default function DeadlineDisplay() {
   if (isNaN(d.getTime())) return <div className="text-sm text-gray-600 dark:text-gray-300">Invalid deadline value</div>
   return (
     <div className="text-sm text-gray-700 dark:text-gray-300">
-      Tuition payment deadline: <span className="font-semibold">{d.toLocaleString()}</span>
+      Tuition payment deadline (Bangladesh time): <span className="font-semibold">{formatDateTimeInDhaka(deadline)}</span>
     </div>
   )
 }
