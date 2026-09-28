@@ -28,6 +28,18 @@ A comprehensive utility tool designed for United International University (UIU) 
 - **Responsive Design:** Optimized for Mobile (iPhone/Android), Tablet, and Desktop.
 - **Reset Data:** One-click reset to clear all stored information.
 
+### 🔗 Share & Export
+Available on every tab (CGPA, Tuition, Target) and on the Results popup.
+
+- **Share:** Opens the native phone share sheet (WhatsApp, Messenger, …). Falls back to
+  copying the link on desktop.
+- **Copy Link:** Every input is encoded into a compact, versioned `?s=` URL parameter —
+  no account and no database needed. Open the link on any device to load the exact
+  same calculation.
+- **Image:** Renders a branded 1080px result card on a canvas and saves it as a PNG.
+- **PDF:** Sends the same card to a print-ready A4 view for “Save as PDF”.
+- Hand-drawn on Canvas 2D, so no `html2canvas`/`jsPDF` was added to the bundle.
+
 ## 🚀 Getting Started
 
 ### Prerequisites

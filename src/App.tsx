@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Facebook, PlusCircle, Trash2, Calculator, GraduationCap, Code2, RefreshCw, X, Sun, Moon, Banknote, Target, RotateCcw } from 'lucide-react';
 import AdminInstallments from './components/AdminInstallments'
+import ShareExportBar from './components/ShareExportBar'
 import supabase from './lib/supabase'
 import { daysUntilInDhaka, formatDateInDhaka, formatLongDateInDhaka, weekdayInDhaka } from './lib/dhakaTime'
+import { readSharedState, clearShareParam, hasSharedContent, type ShareState, type TabId } from './lib/shareState'
+import { buildCgpaCard, buildTuitionCard, buildTargetCard } from './lib/cardBuilders'
 // Confetti removed to improve performance
 
 interface Course {
@@ -51,62 +54,86 @@ const parseStoredArray = <T,>(key: string): T[] => {
   }
 };
 
+// An incoming shared link takes priority over this device's localStorage so a
+// friend sees exactly the calculation that was sent to them. Read once at module
+// load, which keeps every useState initializer below synchronous and flash-free.
+const sharedState = readSharedState();
+
+const storedNumber = (key: string): number | undefined => {
+  const saved = localStorage.getItem(key);
+  if (saved === null || saved === '') return undefined;
+  const parsed = Number(saved);
+  return Number.isFinite(parsed) ? parsed : undefined;
+};
+
+/** Resolution order: shared link -> localStorage -> fallback. */
+const restoreNumber = (
+  shared: number | undefined,
+  key: string,
+  fallback?: number,
+): number | undefined => shared ?? storedNumber(key) ?? fallback;
+
+const unpackCourses = (packed?: string[]): Course[] =>
+  (packed ?? []).map((entry) => {
+    const [credit = '', grade = ''] = entry.split(':');
+    return { credit, grade };
+  });
+
+const unpackRetakes = (packed?: string[]): Retake[] =>
+  (packed ?? []).map((entry) => {
+    const [credit = '', newGrade = '', oldGrade = ''] = entry.split(':');
+    return { credit, newGrade, oldGrade };
+  });
+
 function App() {
-  const [completedCredit, setCompletedCredit] = useState<number | undefined>(() => {
-    const saved = localStorage.getItem('completedCredit');
-    return saved ? Number(saved) : undefined;
-  });
-  const [currentCGPA, setCurrentCGPA] = useState<number | undefined>(() => {
-    const saved = localStorage.getItem('currentCGPA');
-    return saved ? Number(saved) : undefined;
-  });
-  const [courses, setCourses] = useState<Course[]>(() => parseStoredArray<Course>('courses'));
-  const [retakes, setRetakes] = useState<Retake[]>(() => parseStoredArray<Retake>('retakes'));
+  const [completedCredit, setCompletedCredit] = useState<number | undefined>(() =>
+    restoreNumber(sharedState?.cc, 'completedCredit')
+  );
+  const [currentCGPA, setCurrentCGPA] = useState<number | undefined>(() =>
+    restoreNumber(sharedState?.cg, 'currentCGPA')
+  );
+  const [courses, setCourses] = useState<Course[]>(() =>
+    sharedState?.co ? unpackCourses(sharedState.co) : parseStoredArray<Course>('courses')
+  );
+  const [retakes, setRetakes] = useState<Retake[]>(() =>
+    sharedState?.rt ? unpackRetakes(sharedState.rt) : parseStoredArray<Retake>('retakes')
+  );
   const [showResults, setShowResults] = useState(false);
   const [isModalClosing, setIsModalClosing] = useState(false);
   const [theme, setTheme] = useState<'dark' | 'light'>(() => (
     localStorage.getItem('theme') === 'light' ? 'light' : 'dark'
   ));
   // Confetti state removed
-  const [tuitionTotal, setTuitionTotal] = useState<number | undefined>(() => {
-    const saved = localStorage.getItem('tuitionTotal');
-    return saved ? Number(saved) : undefined;
-  });
-  const [activeTab, setActiveTab] = useState<'cgpa' | 'tuition' | 'target'>('cgpa');
-  const [waiverPct, setWaiverPct] = useState<number | undefined>(() => {
-    const saved = localStorage.getItem('waiverPct');
-    return saved ? Number(saved) : undefined;
-  });
-  const [scholarshipPct, setScholarshipPct] = useState<number | undefined>(() => {
-    const saved = localStorage.getItem('scholarshipPct');
-    return saved ? Number(saved) : undefined;
-  });
-  const [trimesterFee, setTrimesterFee] = useState<number>(() => {
-    const saved = localStorage.getItem('trimesterFee');
-    return saved ? Number(saved) : 6500;
-  });
+  const [tuitionTotal, setTuitionTotal] = useState<number | undefined>(() =>
+    restoreNumber(sharedState?.tt, 'tuitionTotal')
+  );
+  const [activeTab, setActiveTab] = useState<TabId>(() => sharedState?.tab ?? 'cgpa');
+  const [waiverPct, setWaiverPct] = useState<number | undefined>(() =>
+    restoreNumber(sharedState?.wp, 'waiverPct')
+  );
+  const [scholarshipPct, setScholarshipPct] = useState<number | undefined>(() =>
+    restoreNumber(sharedState?.sp, 'scholarshipPct')
+  );
+  const [trimesterFee, setTrimesterFee] = useState<number>(() => restoreNumber(sharedState?.tf, 'trimesterFee') ?? 6500);
 
   // FYDP (Final Year Design Project) - no waiver/scholarship, per-credit cost
-  const [fydpCredits, setFydpCredits] = useState<number>(() => {
-    const saved = localStorage.getItem('fydpCredits');
-    return saved ? Number(saved) : 2; // Default 2 credits (1 FYDP course)
-  });
-  const [fydpPerCreditCost, setFydpPerCreditCost] = useState<number>(() => {
-    const saved = localStorage.getItem('fydpPerCreditCost');
-    return saved ? Number(saved) : 5525;
-  });
+  const [fydpCredits, setFydpCredits] = useState<number>(
+    () => restoreNumber(sharedState?.fc, 'fydpCredits') ?? 2 // Default 2 credits (1 FYDP course)
+  );
+  const [fydpPerCreditCost, setFydpPerCreditCost] = useState<number>(
+    () => restoreNumber(sharedState?.fp, 'fydpPerCreditCost') ?? 5525
+  );
 
   // Target CGPA states
-  const [targetCGPA, setTargetCGPA] = useState<number | undefined>(() => {
-    const saved = localStorage.getItem('targetCGPA');
-    return saved ? Number(saved) : undefined;
-  });
-  const [targetCredits, setTargetCredits] = useState<number | undefined>(() => {
-    const saved = localStorage.getItem('targetCredits');
-    return saved ? Number(saved) : undefined;
-  });
+  const [targetCGPA, setTargetCGPA] = useState<number | undefined>(() =>
+    restoreNumber(sharedState?.tg, 'targetCGPA')
+  );
+  const [targetCredits, setTargetCredits] = useState<number | undefined>(() =>
+    restoreNumber(sharedState?.tc, 'targetCredits')
+  );
   const [installmentDates, setInstallmentDates] = useState({ first: '', second: '', third: '' });
   const [countdown, setCountdown] = useState<{ days: number; label: string; date: string } | null>(null);
+  const [sharedLoaded, setSharedLoaded] = useState<boolean>(() => hasSharedContent(sharedState));
 
   // Persist state changes
   useEffect(() => {
@@ -377,6 +404,7 @@ function App() {
       setTargetCGPA(undefined);
       setTargetCredits(undefined);
       setInstallmentDates({ first: '', second: '', third: '' });
+      setSharedLoaded(false);
       localStorage.clear();
       // Restore theme preference
       localStorage.setItem('theme', theme);
@@ -441,6 +469,83 @@ function App() {
     const third = +(total - first - second).toFixed(2);
     return { first, second, third, total: +total.toFixed(2) };
   })();
+
+  // ---------------------------------------------------------------------------
+  // Sharing / exporting
+  // ---------------------------------------------------------------------------
+
+  // The shared state was already applied by the useState initializers above, so
+  // drop the (long) param from the address bar to keep the URL tidy.
+  useEffect(() => {
+    if (sharedLoaded) clearShareParam();
+  }, [sharedLoaded]);
+
+  const buildState = (): ShareState => ({
+    v: 1,
+    tab: activeTab,
+    cc: completedCredit,
+    cg: currentCGPA,
+    co: courses
+      .filter((c) => c.credit || c.grade)
+      .map((c) => `${c.credit}:${c.grade}`),
+    rt: retakes
+      .filter((r) => r.credit || r.newGrade || r.oldGrade)
+      .map((r) => `${r.credit}:${r.newGrade}:${r.oldGrade}`),
+    tt: tuitionTotal,
+    tf: trimesterFee,
+    wp: waiverPct,
+    sp: scholarshipPct,
+    fc: fydpCredits,
+    fp: fydpPerCreditCost,
+    tg: targetCGPA,
+    tc: targetCredits,
+  });
+
+  const dark = theme === 'dark';
+
+  const cgpaExportCard = () => {
+    if (courses.length === 0 && retakes.length === 0) return null;
+    return buildCgpaCard({
+      dark,
+      gpa: calculateGPA(),
+      cgpa: calculateCGPA(),
+      trimesterCredits: calculateCurrentTrimesterCredits(),
+      totalCredits: calculateTotalCredits(),
+      courseCount: courses.length,
+      retakeCount: retakes.length,
+    });
+  };
+
+  const tuitionExportCard = () => {
+    if (totalTuitionPayable <= 0) return null;
+    return buildTuitionCard({
+      dark,
+      tuitionTotal,
+      trimesterFee,
+      waiverPct,
+      scholarshipPct,
+      fydpCredits,
+      fydpPerCreditCost,
+      fydpAmount: fydpTuition,
+      regularAmount: discountedTuition.amount,
+      totalPayable: tuitionBreakdown?.total ?? totalTuitionPayable,
+      breakdown: tuitionBreakdown,
+      installmentDates,
+    });
+  };
+
+  const targetExportCard = () => {
+    const required = calculateTargetGPA();
+    if (required === null) return null;
+    return buildTargetCard({
+      dark,
+      currentCgpa: currentCGPA,
+      completedCredit,
+      targetCgpa: targetCGPA,
+      targetCredits,
+      requiredGpa: required,
+    });
+  };
 
   const isAdminRoute = typeof window !== 'undefined' && window.location.pathname === '/admin';
 
@@ -510,6 +615,23 @@ function App() {
             </div>
           </div>
         </div>)}
+
+        {/* Shared-link notice */}
+        {sharedLoaded && (
+          <div className="mb-4 sm:mb-6 p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-200 flex items-start justify-between gap-3">
+            <p className="text-sm sm:text-base">
+              You are viewing a <span className="font-semibold">shared calculation</span>. Any edit you make is
+              saved on this device.
+            </p>
+            <button
+              onClick={() => setSharedLoaded(false)}
+              className="text-blue-500 hover:text-blue-700 dark:hover:text-blue-300 transition-colors flex-shrink-0"
+              aria-label="Dismiss notice"
+            >
+              <X size={18} />
+            </button>
+          </div>
+        )}
 
         {/* Tabs */}
         <div className="mb-4 sm:mb-6 grid grid-cols-3 gap-2">
@@ -587,6 +709,16 @@ function App() {
               <Calculator size={24} />
               Calculate
             </button>
+
+            <div className="mb-4 sm:mb-6">
+              <ShareExportBar
+                buildCard={cgpaExportCard}
+                buildState={buildState}
+                slug="cgpa"
+                accent="orange"
+                caption={`My UIU CGPA is ${calculateCGPA().toFixed(2)}`}
+              />
+            </div>
 
             <div className="bg-white dark:bg-gray-900 p-3 sm:p-6 rounded-lg mb-4 sm:mb-6 shadow-md transition-colors duration-300">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 mb-4">
@@ -795,6 +927,18 @@ function App() {
                     You already have this CGPA or higher!
                   </p>
                 )}
+              </div>
+            )}
+
+            {calculateTargetGPA() !== null && (
+              <div className="mt-4">
+                <ShareExportBar
+                  buildCard={targetExportCard}
+                  buildState={buildState}
+                  slug="target-cgpa"
+                  accent="purple"
+                  caption={`I need a ${(calculateTargetGPA() || 0).toFixed(2)} GPA this trimester to hit my UIU target CGPA`}
+                />
               </div>
             )}
           </div>
@@ -1011,6 +1155,18 @@ function App() {
               )}
             </div>
             <p className="mt-3 text-xs text-gray-500">Note: Values are auto-calculated; the third payment adjusts slightly for rounding so the sum equals the total.</p>
+
+            {tuitionBreakdown && (
+              <div className="mt-4">
+                <ShareExportBar
+                  buildCard={tuitionExportCard}
+                  buildState={buildState}
+                  slug="tuition"
+                  accent="green"
+                  caption={`My UIU tuition this trimester: ${formatAmount(totalTuitionPayable)}`}
+                />
+              </div>
+            )}
           </div>
         )}
 
@@ -1065,6 +1221,16 @@ function App() {
                   <p className="text-sm mb-1">Total Credits Completed</p>
                   <p className="text-2xl sm:text-3xl font-bold text-orange-500">{calculateTotalCredits()}</p>
                 </div>
+              </div>
+
+              <div className="mt-6">
+                <ShareExportBar
+                  buildCard={cgpaExportCard}
+                  buildState={buildState}
+                  slug="cgpa"
+                  accent="orange"
+                  caption={`My UIU CGPA is ${calculateCGPA().toFixed(2)}`}
+                />
               </div>
 
               <button
