@@ -1,5 +1,5 @@
-import React, { useCallback, useRef, useState } from 'react'
-import { Share2, Link2, Check, Image as ImageIcon, FileDown, Loader2 } from 'lucide-react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { Share2, Link2, Check, Image as ImageIcon, FileDown, Loader2, ChevronDown } from 'lucide-react'
 import { buildShareUrl, type ShareState } from '../lib/shareState'
 import {
   renderCard,
@@ -16,13 +16,10 @@ interface ShareExportBarProps {
   slug: string
   /** Prefill text for the native share sheet. */
   caption?: string
-  /** Colour of the accent buttons, matching the owning tab. */
+  /** Colour of the accent button, matching the owning tab. */
   accent?: 'orange' | 'green' | 'purple'
   disabled?: boolean
 }
-
-const SOFT =
-  'bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200'
 
 const ACCENTS: Record<string, string> = {
   orange: 'bg-orange-500 hover:bg-orange-600 text-white',
@@ -57,6 +54,28 @@ const copyText = async (text: string): Promise<boolean> => {
   }
 }
 
+interface MenuItemProps {
+  icon: React.ReactNode
+  onClick: () => void
+  disabled?: boolean
+  children: React.ReactNode
+}
+
+function MenuItem({ icon, onClick, disabled, children }: MenuItemProps) {
+  return (
+    <button
+      type="button"
+      role="menuitem"
+      onClick={onClick}
+      disabled={disabled}
+      className="flex w-full items-center gap-3 px-3.5 py-2.5 text-left text-sm font-medium text-gray-700 dark:text-gray-200 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      <span className="text-gray-500 dark:text-gray-400">{icon}</span>
+      {children}
+    </button>
+  )
+}
+
 export default function ShareExportBar({
   buildCard,
   buildState,
@@ -66,7 +85,9 @@ export default function ShareExportBar({
   disabled = false,
 }: ShareExportBarProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const rootRef = useRef<HTMLDivElement | null>(null)
   const [toast, setToast] = useState<string | null>(null)
+  const [open, setOpen] = useState(false)
   const [busy, setBusy] = useState(false)
   const [copied, setCopied] = useState(false)
   const toastTimer = useRef<number | undefined>(undefined)
@@ -76,6 +97,23 @@ export default function ShareExportBar({
     window.clearTimeout(toastTimer.current)
     toastTimer.current = window.setTimeout(() => setToast(null), 2600)
   }, [])
+
+  // Close the menu on outside click or Escape.
+  useEffect(() => {
+    if (!open) return
+    const onPointerDown = (event: MouseEvent) => {
+      if (rootRef.current && !rootRef.current.contains(event.target as Node)) setOpen(false)
+    }
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('mousedown', onPointerDown)
+    document.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.removeEventListener('mousedown', onPointerDown)
+      document.removeEventListener('keydown', onKeyDown)
+    }
+  }, [open])
 
   /** Renders the current card onto the offscreen canvas (or returns null). */
   const paint = useCallback((): HTMLCanvasElement | null => {
@@ -133,29 +171,56 @@ export default function ShareExportBar({
   }
 
   const solid = ACCENTS[accent] ?? ACCENTS.orange
-  const base =
-    'flex-1 min-w-[100px] flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed'
+
+  const run = (action: () => void | Promise<void>) => () => {
+    setOpen(false)
+    void action()
+  }
 
   return (
-    <div className="relative">
-      <div className="flex flex-wrap gap-2">
-        <button type="button" onClick={handleNativeShare} disabled={disabled} className={`${base} ${SOFT}`} title="Copy or share a link with all your inputs">
-          <Share2 size={17} />
-          Share
-        </button>
-        <button type="button" onClick={handleCopyLink} disabled={disabled} className={`${base} ${SOFT}`} title="Copy link">
-          {copied ? <Check size={17} /> : <Link2 size={17} />}
-          {copied ? 'Copied' : 'Copy Link'}
-        </button>
-        <button type="button" onClick={handleImage} disabled={disabled || busy} className={`${base} ${solid}`} title="Save a shareable image">
-          {busy ? <Loader2 size={17} className="animate-spin" /> : <ImageIcon size={17} />}
-          Image
-        </button>
-        <button type="button" onClick={handlePdf} disabled={disabled} className={`${base} ${SOFT}`} title="Save as PDF">
-          <FileDown size={17} />
-          PDF
-        </button>
-      </div>
+    <div className="relative" ref={rootRef}>
+      <button
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        disabled={disabled}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        title="Share or export your result"
+        className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold shadow-sm transition-all duration-300 hover:shadow-md active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed ${solid}`}
+      >
+        <Share2 size={18} />
+        Share
+        <ChevronDown size={16} className={`transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
+      </button>
+
+      {open && (
+        <div
+          role="menu"
+          aria-label="Share and export options"
+          className="absolute left-0 z-50 mt-2 w-56 overflow-hidden rounded-xl border border-gray-200 bg-white py-1 shadow-xl dark:border-gray-700 dark:bg-gray-900"
+        >
+          <MenuItem icon={<Share2 size={18} />} onClick={run(handleNativeShare)}>
+            Share link
+          </MenuItem>
+          <MenuItem
+            icon={copied ? <Check size={18} className="text-green-500" /> : <Link2 size={18} />}
+            onClick={run(handleCopyLink)}
+          >
+            {copied ? 'Link copied' : 'Copy link'}
+          </MenuItem>
+          <div className="my-1 h-px bg-gray-200 dark:bg-gray-700" />
+          <MenuItem
+            icon={busy ? <Loader2 size={18} className="animate-spin" /> : <ImageIcon size={18} />}
+            onClick={run(handleImage)}
+            disabled={busy}
+          >
+            Save as image
+          </MenuItem>
+          <MenuItem icon={<FileDown size={18} />} onClick={run(handlePdf)}>
+            Save as PDF
+          </MenuItem>
+        </div>
+      )}
 
       {toast && (
         <div
@@ -172,4 +237,3 @@ export default function ShareExportBar({
     </div>
   )
 }
-
